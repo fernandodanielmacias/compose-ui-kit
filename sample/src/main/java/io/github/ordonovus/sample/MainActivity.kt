@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import io.github.ordonovus.sample.component.button.UiButtonSample
+import io.github.ordonovus.sample.component.text.UiTextSample
 import io.github.ordonovus.sample.component.text.UiTypographySample
 import io.github.ordonovus.theme.UiKitTheme
 
@@ -15,7 +16,8 @@ class MainActivity : ComponentActivity() {
         setContent {
             UiKitTheme {
                 //UiButtonSample()
-                UiTypographySample()
+                //UiTypographySample()
+                UiTextSample()
             }
         }
     }
