@@ -4,10 +4,13 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import io.github.ordonovus.sample.component.button.UiButtonSample
-import io.github.ordonovus.sample.component.text.UiTextSample
-import io.github.ordonovus.sample.component.text.UiTypographySample
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.ui.Modifier
+import io.github.ordonovus.sample.component.textfield.UiTextFieldSample
 import io.github.ordonovus.theme.UiKitTheme
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -15,9 +18,15 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             UiKitTheme {
-                //UiButtonSample()
-                //UiTypographySample()
-                UiTextSample()
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
+                    //UiButtonSample()
+                    //UiTypographySample()
+                    //UiTextSample()
+                    UiTextFieldSample()
+                }
             }
         }
     }
