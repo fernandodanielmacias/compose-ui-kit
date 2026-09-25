@@ -17,9 +17,9 @@ import io.github.ordonovus.component.button.UiElevatedButton
 import io.github.ordonovus.component.button.UiFilledTonalButton
 import io.github.ordonovus.component.button.UiOutlinedButton
 import io.github.ordonovus.component.button.UiTextButton
+import io.github.ordonovus.sample.ui.SamplePreview
 import io.github.ordonovus.theme.UiDimensMedium
 import io.github.ordonovus.theme.UiDimensSmall
-import io.github.ordonovus.theme.UiKitTheme
 
 /**
  * Displays the complete button component showcase used by the sample module.
@@ -99,13 +99,12 @@ fun UiButtonSample() {
 @Preview(
     name = "Buttons - Light",
     showBackground = true,
-    widthDp = 360
+    widthDp = 360,
+    heightDp = 700
 )
 @Composable
 private fun UiButtonSampleLightPreview() {
-    UiKitTheme(
-        darkTheme = false
-    ) {
+    SamplePreview {
         UiButtonSample()
     }
 }
@@ -116,11 +115,12 @@ private fun UiButtonSampleLightPreview() {
 @Preview(
     name = "Buttons - Dark",
     showBackground = true,
-    widthDp = 360
+    widthDp = 360,
+    heightDp = 700
 )
 @Composable
 private fun UiButtonSampleDarkPreview() {
-    UiKitTheme(
+    SamplePreview(
         darkTheme = true
     ) {
         UiButtonSample()

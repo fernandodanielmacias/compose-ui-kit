@@ -11,9 +11,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import io.github.ordonovus.component.text.UiText
 import io.github.ordonovus.component.textfield.UiOutlinedTextField
 import io.github.ordonovus.component.textfield.UiTextField
+import io.github.ordonovus.component.textfield.UiTextFieldDefaults
+import io.github.ordonovus.sample.ui.SamplePreview
 import io.github.ordonovus.theme.UiDimensMedium
 import io.github.ordonovus.theme.UiDimensSmall
-import io.github.ordonovus.theme.UiKitTheme
 
 /**
  * Displays the text field variants and states provided by Compose UI Kit.
@@ -68,7 +69,8 @@ fun UiTextFieldSample() {
                 UiText("Maximum 50 characters")
             },
             maxLength = 50,
-            showCharacterCount = true
+            showCharacterCount = true,
+            lineLimits = UiTextFieldDefaults.multiLine(),
         )
 
         UiOutlinedTextField(
@@ -112,9 +114,7 @@ fun UiTextFieldSample() {
 )
 @Composable
 private fun UiTextFieldSampleLightPreview() {
-    UiKitTheme(
-        darkTheme = false
-    ) {
+    SamplePreview {
         UiTextFieldSample()
     }
 }
@@ -130,7 +130,7 @@ private fun UiTextFieldSampleLightPreview() {
 )
 @Composable
 private fun UiTextFieldSampleDarkPreview() {
-    UiKitTheme(
+    SamplePreview(
         darkTheme = true
     ) {
         UiTextFieldSample()

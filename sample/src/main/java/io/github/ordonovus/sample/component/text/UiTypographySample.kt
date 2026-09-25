@@ -8,6 +8,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import io.github.ordonovus.sample.ui.SamplePreview
 import io.github.ordonovus.theme.UiKitTheme
 import io.github.ordonovus.theme.UiTypographyBody
 import io.github.ordonovus.theme.UiTypographyBodySecondary
@@ -70,13 +71,12 @@ fun UiTypographySample() {
 @Preview(
     name = "Typography - Light",
     showBackground = true,
-    widthDp = 360
+    widthDp = 360,
+    heightDp = 700
 )
 @Composable
 private fun UiTypographySampleLightPreview() {
-    UiKitTheme(
-        darkTheme = false
-    ) {
+    SamplePreview {
         UiTypographySample()
     }
 }
@@ -87,11 +87,12 @@ private fun UiTypographySampleLightPreview() {
 @Preview(
     name = "Typography - Dark",
     showBackground = true,
-    widthDp = 360
+    widthDp = 360,
+    heightDp = 700
 )
 @Composable
 private fun UiTypographySampleDarkPreview() {
-    UiKitTheme(
+    SamplePreview(
         darkTheme = true
     ) {
         UiTypographySample()

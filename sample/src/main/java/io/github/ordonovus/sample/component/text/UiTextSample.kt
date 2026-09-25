@@ -14,6 +14,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import io.github.ordonovus.component.text.UiText
 import io.github.ordonovus.component.text.UiTextVariant
+import io.github.ordonovus.sample.ui.SamplePreview
 import io.github.ordonovus.theme.UiDimensMedium
 import io.github.ordonovus.theme.UiDimensSmall
 import io.github.ordonovus.theme.UiKitTheme
@@ -91,13 +92,12 @@ fun UiTextSample() {
 @Preview(
     name = "Text - Light",
     showBackground = true,
-    widthDp = 360
+    widthDp = 360,
+    heightDp = 700
 )
 @Composable
 private fun UiTextSampleLightPreview() {
-    UiKitTheme(
-        darkTheme = false
-    ) {
+    SamplePreview {
         UiTextSample()
     }
 }
@@ -108,11 +108,12 @@ private fun UiTextSampleLightPreview() {
 @Preview(
     name = "Text - Dark",
     showBackground = true,
-    widthDp = 360
+    widthDp = 360,
+    heightDp = 700
 )
 @Composable
 private fun UiTextSampleDarkPreview() {
-    UiKitTheme(
+    SamplePreview(
         darkTheme = true
     ) {
         UiTextSample()
