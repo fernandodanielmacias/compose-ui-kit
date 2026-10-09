@@ -1,10 +1,6 @@
 package io.github.ordonovus.component.textfield
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.text.input.InputTransformation
@@ -16,7 +12,6 @@ import androidx.compose.foundation.text.input.maxLength
 import androidx.compose.foundation.text.input.then
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.OutlinedTextFieldDefaults
-import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldColors
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.TextFieldLabelScope
@@ -60,6 +55,9 @@ import androidx.compose.ui.unit.Dp
  * the field.
  * @param trailingIcon Optional icon or content displayed at the end of the
  * field.
+ * @param showClearButton Whether to display the default clear action when
+ * the field contains text. A custom [trailingIcon] takes precedence.
+ * The clear action is hidden when the field is disabled or read-only.
  * @param prefix Optional content displayed before the editable text.
  * @param suffix Optional content displayed after the editable text.
  * @param maxLength Optional maximum number of characters accepted by the
@@ -112,6 +110,7 @@ fun UiTextField(
     supportingText: (@Composable () -> Unit)? = null,
     leadingIcon: (@Composable () -> Unit)? = null,
     trailingIcon: (@Composable () -> Unit)? = null,
+    showClearButton: Boolean = true,
     prefix: (@Composable () -> Unit)? = null,
     suffix: (@Composable () -> Unit)? = null,
     maxLength: Int? = null,
@@ -133,7 +132,7 @@ fun UiTextField(
         inputTransformation = inputTransformation
     )
 
-    val finalSupportingText = supportingContent(
+    val finalSupportingText = resolveTextFieldSupportingContent(
         state = state,
         maxLength = maxLength,
         showCharacterCount = showCharacterCount,
@@ -147,6 +146,14 @@ fun UiTextField(
         readOnly -> UiTextFieldDefaults.ReadOnlyTextColor
         else -> UiTextFieldDefaults.TextColor
     }
+
+    val resolvedTrailingIcon = resolveTextFieldTrailingIcon(
+        state = state,
+        enabled = enabled,
+        readOnly = readOnly,
+        showClearButton = showClearButton,
+        trailingIcon = trailingIcon
+    )
 
     BasicTextField(
         state = state,
@@ -171,7 +178,7 @@ fun UiTextField(
             label = label,
             placeholder = placeholder,
             leadingIcon = leadingIcon,
-            trailingIcon = trailingIcon,
+            trailingIcon = resolvedTrailingIcon,
             prefix = prefix,
             suffix = suffix,
             supportingText = finalSupportingText,
@@ -223,6 +230,9 @@ fun UiTextField(
  * the field.
  * @param trailingIcon Optional icon or content displayed at the end of the
  * field.
+ * @param showClearButton Whether to display the default clear action when
+ * the field contains text. A custom [trailingIcon] takes precedence.
+ * The clear action is hidden when the field is disabled or read-only.
  * @param prefix Optional content displayed before the editable text.
  * @param suffix Optional content displayed after the editable text.
  * @param maxLength Optional maximum number of characters accepted by the
@@ -272,6 +282,7 @@ fun UiOutlinedTextField(
     supportingText: (@Composable () -> Unit)? = null,
     leadingIcon: (@Composable () -> Unit)? = null,
     trailingIcon: (@Composable () -> Unit)? = null,
+    showClearButton: Boolean = true,
     prefix: (@Composable () -> Unit)? = null,
     suffix: (@Composable () -> Unit)? = null,
     maxLength: Int? = null,
@@ -293,7 +304,7 @@ fun UiOutlinedTextField(
         inputTransformation = inputTransformation
     )
 
-    val finalSupportingText = supportingContent(
+    val finalSupportingText = resolveTextFieldSupportingContent(
         state = state,
         maxLength = maxLength,
         showCharacterCount = showCharacterCount,
@@ -307,6 +318,14 @@ fun UiOutlinedTextField(
         readOnly -> UiTextFieldDefaults.ReadOnlyTextColor
         else -> UiTextFieldDefaults.TextColor
     }
+
+    val resolvedTrailingIcon = resolveTextFieldTrailingIcon(
+        state = state,
+        enabled = enabled,
+        readOnly = readOnly,
+        showClearButton = showClearButton,
+        trailingIcon = trailingIcon
+    )
 
     BasicTextField(
         state = state,
@@ -331,7 +350,7 @@ fun UiOutlinedTextField(
             label = label,
             placeholder = placeholder,
             leadingIcon = leadingIcon,
-            trailingIcon = trailingIcon,
+            trailingIcon = resolvedTrailingIcon,
             prefix = prefix,
             suffix = suffix,
             supportingText = finalSupportingText,
@@ -369,6 +388,10 @@ private fun createInputTransformation(
     maxLength: Int?,
     inputTransformation: InputTransformation?
 ): InputTransformation? {
+    require(maxLength == null || maxLength >= 0) {
+        "maxLength must be greater than or equal to zero."
+    }
+
     val lengthTransformation = maxLength?.let {
         InputTransformation.maxLength(it)
     }
@@ -382,59 +405,5 @@ private fun createInputTransformation(
 
         else ->
             inputTransformation
-    }
-}
-
-/**
- * Creates the supporting content displayed below a text field.
- *
- * The supporting message is aligned to the start while the character counter,
- * when enabled, is aligned to the end. Error text takes precedence over the
- * regular supporting content.
- *
- * @param state Current text field state used to calculate the character count.
- * @param maxLength Maximum number of characters allowed.
- * @param showCharacterCount Whether the character counter should be displayed.
- * @param isError Whether the text field is currently in an error state.
- * @param errorText Error message displayed when the field is in an error state.
- * @param supportingText Optional supporting content displayed below the field.
- *
- * @return Supporting content for the text field, or `null` when no content
- * needs to be displayed.
- */
-@Composable
-private fun supportingContent(
-    state: TextFieldState,
-    maxLength: Int?,
-    showCharacterCount: Boolean,
-    isError: Boolean,
-    errorText: String?,
-    supportingText: (@Composable () -> Unit)?
-): (@Composable () -> Unit)? {
-    val shouldShowError = isError && !errorText.isNullOrBlank()
-    val shouldShowCounter = showCharacterCount && maxLength != null
-
-    if (!shouldShowError && !shouldShowCounter && supportingText == null) {
-        return null
-    }
-
-    return {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            Box(
-                modifier = Modifier.weight(1f)
-            ) {
-                when {
-                    shouldShowError -> Text(text = errorText)
-                    supportingText != null -> supportingText()
-                }
-            }
-
-            if (shouldShowCounter) {
-                Text(text = "${state.text.length} / $maxLength")
-            }
-        }
     }
 }

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ui_text_field_clear">Borrar texto</string>
+    <string name="ui_password_show">Mostrar contraseña</string>
+    <string name="ui_password_hide">Ocultar contraseña</string>
+</resources>
