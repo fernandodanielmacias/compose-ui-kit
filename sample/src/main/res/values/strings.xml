@@ -1,3 +1,93 @@
 <resources>
-    <string name="app_name">Compose UI Kit Sample</string>
+    <string name="app_name" translatable="false">UI Kit</string>
+
+    <string name="sample_buttons_title">Buttons</string>
+    <string name="sample_buttons_description">Button variants, states, and configurations.</string>
+
+    <string name="sample_buttons_variants_title">Variants</string>
+    <string name="sample_buttons_variants_description">Available Material 3 button styles.</string>
+
+    <string name="sample_buttons_states_title">States</string>
+    <string name="sample_buttons_states_description">Example of a disabled button.</string>
+
+    <string name="sample_buttons_icons_title">Icons</string>
+    <string name="sample_buttons_icons_description">Buttons combining icons and text.</string>
+
+    <string name="sample_buttons_layout_title">Layout</string>
+    <string name="sample_buttons_layout_description">A button that fills the available width.</string>
+
+    <string name="sample_button_filled">Filled Button</string>
+    <string name="sample_button_filled_tonal">Filled Tonal Button</string>
+    <string name="sample_button_elevated">Elevated Button</string>
+    <string name="sample_button_outlined">Outlined Button</string>
+    <string name="sample_button_text">Text Button</string>
+    <string name="sample_button_disabled">Disabled Button</string>
+    <string name="sample_button_save">Save</string>
+    <string name="sample_button_full_width">Full Width</string>
+
+    <!-- Text component showcase -->
+    <string name="sample_text_title">Text</string>
+    <string name="sample_text_description">Semantic typography, colors, and rich text examples.</string>
+
+    <string name="sample_text_typography_title">Typography</string>
+    <string name="sample_text_typography_description">Semantic text styles available in Compose UI Kit.</string>
+
+    <string name="sample_text_display">Display</string>
+    <string name="sample_text_heading">Heading</string>
+    <string name="sample_text_variant_title">Title</string>
+    <string name="sample_text_body">Body</string>
+    <string name="sample_text_body_secondary">Secondary body</string>
+    <string name="sample_text_label">Label</string>
+
+    <string name="sample_text_colors_title">Colors</string>
+    <string name="sample_text_colors_description">Semantic colors for communicating different states.</string>
+    <string name="sample_text_error">This is an error message</string>
+
+    <string name="sample_text_annotated_title">Annotated text</string>
+    <string name="sample_text_annotated_description">Text with multiple styles in a single component.</string>
+    <string name="sample_text_status_prefix">Status: </string>
+    <string name="sample_text_status_approved">Approved</string>
+
+    <!-- Text field component showcase -->
+    <string name="sample_text_fields_title">Text fields</string>
+    <string name="sample_text_fields_description">Text input components, validation, states, and secure passwords.</string>
+
+    <string name="sample_text_fields_variants_title">Variants</string>
+    <string name="sample_text_fields_variants_description">Filled and outlined Material 3 text fields.</string>
+    <string name="sample_text_fields_filled">Filled field</string>
+    <string name="sample_text_fields_outlined">Outlined field</string>
+    <string name="sample_text_fields_placeholder">Enter text</string>
+
+    <string name="sample_text_fields_multiline_title">Multiline input</string>
+    <string name="sample_text_fields_multiline_description">Text input with multiple lines and a character counter.</string>
+    <string name="sample_text_fields_description_label">Description</string>
+    <string name="sample_text_fields_maximum_placeholder">Maximum 50 characters</string>
+
+    <string name="sample_text_fields_validation_title">Validation</string>
+    <string name="sample_text_fields_validation_description">Error feedback for invalid input.</string>
+    <string name="sample_text_fields_error_label">Error field</string>
+    <string name="sample_text_fields_error_message">The entered value is invalid</string>
+    <string name="sample_text_fields_invalid_value">Invalid value</string>
+
+    <string name="sample_text_fields_states_title">States</string>
+    <string name="sample_text_fields_states_description">Disabled and read-only text fields.</string>
+    <string name="sample_text_fields_disabled_label">Disabled field</string>
+    <string name="sample_text_fields_disabled_value">Disabled value</string>
+    <string name="sample_text_fields_read_only_label">Read-only field</string>
+    <string name="sample_text_fields_read_only_value">Read-only value</string>
+
+    <string name="sample_text_fields_password_title">Password</string>
+    <string name="sample_text_fields_password_description">Secure input with a password visibility toggle.</string>
+    <string name="sample_text_fields_password_label">Password</string>
+
+    <!-- Catalog navigation -->
+    <string name="sample_navigation_button">Buttons</string>
+    <string name="sample_navigation_typography">Typography</string>
+    <string name="sample_navigation_text">Text</string>
+    <string name="sample_navigation_text_field">Text fields</string>
+
+    <string name="sample_catalog_title">Compose UI Kit</string>
+    <string name="sample_catalog_description">Explore reusable Compose components</string>
+    <string name="sample_navigation_menu">Open navigation menu</string>
+    <string name="sample_navigation_components">Components</string>
 </resources>

@@ -9,127 +9,166 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.text.input.rememberTextFieldState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import io.github.ordonovus.component.text.UiText
 import io.github.ordonovus.component.textfield.UiOutlinedPasswordTextField
 import io.github.ordonovus.component.textfield.UiOutlinedTextField
 import io.github.ordonovus.component.textfield.UiTextField
 import io.github.ordonovus.component.textfield.UiTextFieldDefaults
+import io.github.ordonovus.sample.R
+import io.github.ordonovus.sample.ui.SampleComponentHeader
 import io.github.ordonovus.sample.ui.SamplePreview
+import io.github.ordonovus.sample.ui.SampleSection
+import io.github.ordonovus.theme.UiDimensLarge
 import io.github.ordonovus.theme.UiDimensMedium
 
 /**
  * Displays the text field variants and states provided by Compose UI Kit.
  *
- * This sample verifies filled and outlined text fields, placeholders,
- * character limits, error states, disabled states, and read-only states.
+ * Demonstrates filled, outlined, multiline, error, disabled,
+ * read-only, and secure password text fields.
  */
 @Composable
 fun UiTextFieldSample() {
     val filledState = rememberTextFieldState()
     val outlinedState = rememberTextFieldState()
     val limitedState = rememberTextFieldState()
-    val errorState = rememberTextFieldState("Invalid value")
-    val disabledState = rememberTextFieldState("Disabled value")
-    val readOnlyState = rememberTextFieldState("Read-only value")
+
+    val errorState = rememberTextFieldState(
+        stringResource(R.string.sample_text_fields_invalid_value)
+    )
+
+    val disabledState = rememberTextFieldState(
+        stringResource(R.string.sample_text_fields_disabled_value)
+    )
+
+    val readOnlyState = rememberTextFieldState(
+        stringResource(R.string.sample_text_fields_read_only_value)
+    )
+
     val passwordState = rememberTextFieldState()
 
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
             .imePadding(),
-        contentPadding = PaddingValues(
-            start = UiDimensMedium,
-            top = UiDimensMedium,
-            end = UiDimensMedium
-        ),
-        verticalArrangement = Arrangement.spacedBy(UiDimensMedium)
+        contentPadding = PaddingValues(UiDimensMedium),
+        verticalArrangement = Arrangement.spacedBy(UiDimensLarge)
     ) {
         item {
-            UiTextField(
-                state = filledState,
-                modifier = Modifier.fillMaxWidth(),
-                label = {
-                    UiText("Filled field")
-                },
-                placeholder = {
-                    UiText("Enter text")
-                }
+            SampleComponentHeader(
+                title = stringResource(R.string.sample_text_fields_title),
+                description = stringResource(R.string.sample_text_fields_description)
             )
         }
 
         item {
-            UiOutlinedTextField(
-                state = outlinedState,
-                modifier = Modifier.fillMaxWidth(),
-                label = {
-                    UiText("Outlined field")
-                },
-                placeholder = {
-                    UiText("Enter text")
-                }
-            )
+            SampleSection(
+                title = stringResource(R.string.sample_text_fields_variants_title),
+                description = stringResource(R.string.sample_text_fields_variants_description)
+            ) {
+                UiTextField(
+                    state = filledState,
+                    modifier = Modifier.fillMaxWidth(),
+                    label = {
+                        UiText(stringResource(R.string.sample_text_fields_filled))
+                    },
+                    placeholder = {
+                        UiText(stringResource(R.string.sample_text_fields_placeholder))
+                    }
+                )
+
+                UiOutlinedTextField(
+                    state = outlinedState,
+                    modifier = Modifier.fillMaxWidth(),
+                    label = {
+                        UiText(stringResource(R.string.sample_text_fields_outlined))
+                    },
+                    placeholder = {
+                        UiText(stringResource(R.string.sample_text_fields_placeholder))
+                    }
+                )
+            }
         }
 
         item {
-            UiOutlinedTextField(
-                state = limitedState,
-                modifier = Modifier.fillMaxWidth(),
-                label = {
-                    UiText("Description")
-                },
-                placeholder = {
-                    UiText("Maximum 50 characters")
-                },
-                maxLength = 50,
-                showCharacterCount = true,
-                lineLimits = UiTextFieldDefaults.multiLine(),
-            )
+            SampleSection(
+                title = stringResource(R.string.sample_text_fields_multiline_title),
+                description = stringResource(R.string.sample_text_fields_multiline_description)
+            ) {
+                UiOutlinedTextField(
+                    state = limitedState,
+                    modifier = Modifier.fillMaxWidth(),
+                    label = {
+                        UiText(stringResource(R.string.sample_text_fields_description_label))
+                    },
+                    placeholder = {
+                        UiText(stringResource(R.string.sample_text_fields_maximum_placeholder))
+                    },
+                    maxLength = 50,
+                    showCharacterCount = true,
+                    lineLimits = UiTextFieldDefaults.multiLine()
+                )
+            }
         }
 
         item {
-            UiOutlinedTextField(
-                state = errorState,
-                modifier = Modifier.fillMaxWidth(),
-                label = {
-                    UiText("Error field")
-                },
-                isError = true,
-                errorText = "The entered value is invalid"
-            )
+            SampleSection(
+                title = stringResource(R.string.sample_text_fields_validation_title),
+                description = stringResource(R.string.sample_text_fields_validation_description)
+            ) {
+                UiOutlinedTextField(
+                    state = errorState,
+                    modifier = Modifier.fillMaxWidth(),
+                    label = {
+                        UiText(stringResource(R.string.sample_text_fields_error_label))
+                    },
+                    isError = true,
+                    errorText = stringResource(R.string.sample_text_fields_error_message)
+                )
+            }
         }
 
         item {
-            UiOutlinedTextField(
-                state = disabledState,
-                modifier = Modifier.fillMaxWidth(),
-                enabled = false,
-                label = {
-                    UiText("Disabled field")
-                }
-            )
+            SampleSection(
+                title = stringResource(R.string.sample_text_fields_states_title),
+                description = stringResource(R.string.sample_text_fields_states_description)
+            ) {
+                UiOutlinedTextField(
+                    state = disabledState,
+                    modifier = Modifier.fillMaxWidth(),
+                    enabled = false,
+                    label = {
+                        UiText(stringResource(R.string.sample_text_fields_disabled_label))
+                    }
+                )
+
+                UiOutlinedTextField(
+                    state = readOnlyState,
+                    modifier = Modifier.fillMaxWidth(),
+                    readOnly = true,
+                    label = {
+                        UiText(stringResource(R.string.sample_text_fields_read_only_label))
+                    }
+                )
+            }
         }
 
         item {
-            UiOutlinedTextField(
-                state = readOnlyState,
-                modifier = Modifier.fillMaxWidth(),
-                readOnly = true,
-                label = {
-                    UiText("Read-only field")
-                }
-            )
-        }
-
-        item {
-            UiOutlinedPasswordTextField(
-                state = passwordState,
-                modifier = Modifier.fillMaxWidth(),
-                label = {
-                    UiText("Password")
-                },
-                maxLength = 20
-            )
+            SampleSection(
+                title = stringResource(R.string.sample_text_fields_password_title),
+                description = stringResource(R.string.sample_text_fields_password_description)
+            ) {
+                UiOutlinedPasswordTextField(
+                    state = passwordState,
+                    modifier = Modifier.fillMaxWidth(),
+                    label = {
+                        UiText(stringResource(R.string.sample_text_fields_password_label))
+                    },
+                    maxLength = 20
+                )
+            }
         }
 
     }

@@ -1,0 +1,91 @@
+<resources>
+    <string name="sample_buttons_title">Botones</string>
+    <string name="sample_buttons_description">Variantes, estados y configuraciones de botones.</string>
+
+    <string name="sample_buttons_variants_title">Variantes</string>
+    <string name="sample_buttons_variants_description">Estilos disponibles de Material 3.</string>
+
+    <string name="sample_buttons_states_title">Estados</string>
+    <string name="sample_buttons_states_description">Ejemplo de un botón deshabilitado.</string>
+
+    <string name="sample_buttons_icons_title">Iconos</string>
+    <string name="sample_buttons_icons_description">Botones que combinan iconografía y texto.</string>
+
+    <string name="sample_buttons_layout_title">Distribución</string>
+    <string name="sample_buttons_layout_description">Botón que ocupa todo el ancho disponible.</string>
+
+    <string name="sample_button_filled">Botón principal</string>
+    <string name="sample_button_filled_tonal">Botón tonal</string>
+    <string name="sample_button_elevated">Botón elevado</string>
+    <string name="sample_button_outlined">Botón con contorno</string>
+    <string name="sample_button_text">Botón de texto</string>
+    <string name="sample_button_disabled">Botón deshabilitado</string>
+    <string name="sample_button_save">Guardar</string>
+    <string name="sample_button_full_width">Ancho completo</string>
+
+    <!-- Text component showcase -->
+    <string name="sample_text_title">Texto</string>
+    <string name="sample_text_description">Tipografía semántica, colores y ejemplos de texto enriquecido.</string>
+
+    <string name="sample_text_typography_title">Tipografía</string>
+    <string name="sample_text_typography_description">Estilos de texto semánticos disponibles en Compose UI Kit.</string>
+
+    <string name="sample_text_display">Texto destacado</string>
+    <string name="sample_text_heading">Encabezado</string>
+    <string name="sample_text_variant_title">Título</string>
+    <string name="sample_text_body">Cuerpo de texto</string>
+    <string name="sample_text_body_secondary">Texto secundario</string>
+    <string name="sample_text_label">Etiqueta</string>
+
+    <string name="sample_text_colors_title">Colores</string>
+    <string name="sample_text_colors_description">Colores semánticos para comunicar diferentes estados.</string>
+    <string name="sample_text_error">Este es un mensaje de error</string>
+
+    <string name="sample_text_annotated_title">Texto enriquecido</string>
+    <string name="sample_text_annotated_description">Texto con diferentes estilos dentro de un mismo componente.</string>
+    <string name="sample_text_status_prefix">Estado: </string>
+    <string name="sample_text_status_approved">Aprobado</string>
+
+    <!-- Text field component showcase -->
+    <string name="sample_text_fields_title">Campos de texto</string>
+    <string name="sample_text_fields_description">Componentes de entrada de texto, validaciones, estados y contraseñas seguras.</string>
+
+    <string name="sample_text_fields_variants_title">Variantes</string>
+    <string name="sample_text_fields_variants_description">Campos de texto rellenos y con contorno de Material 3.</string>
+    <string name="sample_text_fields_filled">Campo relleno</string>
+    <string name="sample_text_fields_outlined">Campo con contorno</string>
+    <string name="sample_text_fields_placeholder">Ingresa texto</string>
+
+    <string name="sample_text_fields_multiline_title">Entrada multilínea</string>
+    <string name="sample_text_fields_multiline_description">Entrada de varias líneas con contador de caracteres.</string>
+    <string name="sample_text_fields_description_label">Descripción</string>
+    <string name="sample_text_fields_maximum_placeholder">Máximo 50 caracteres</string>
+
+    <string name="sample_text_fields_validation_title">Validación</string>
+    <string name="sample_text_fields_validation_description">Mensajes de error para entradas no válidas.</string>
+    <string name="sample_text_fields_error_label">Campo con error</string>
+    <string name="sample_text_fields_error_message">El valor ingresado no es válido</string>
+    <string name="sample_text_fields_invalid_value">Valor no válido</string>
+
+    <string name="sample_text_fields_states_title">Estados</string>
+    <string name="sample_text_fields_states_description">Campos de texto deshabilitados y de solo lectura.</string>
+    <string name="sample_text_fields_disabled_label">Campo deshabilitado</string>
+    <string name="sample_text_fields_disabled_value">Valor deshabilitado</string>
+    <string name="sample_text_fields_read_only_label">Campo de solo lectura</string>
+    <string name="sample_text_fields_read_only_value">Valor de solo lectura</string>
+
+    <string name="sample_text_fields_password_title">Contraseña</string>
+    <string name="sample_text_fields_password_description">Entrada segura con opción para mostrar u ocultar la contraseña.</string>
+    <string name="sample_text_fields_password_label">Contraseña</string>
+
+    <!-- Catalog navigation -->
+    <string name="sample_navigation_button">Botones</string>
+    <string name="sample_navigation_typography">Tipografía</string>
+    <string name="sample_navigation_text">Texto</string>
+    <string name="sample_navigation_text_field">Campos de texto</string>
+
+    <string name="sample_catalog_title">Compose UI Kit</string>
+    <string name="sample_catalog_description">Explora componentes reutilizables de Compose</string>
+    <string name="sample_navigation_menu">Abrir menú de navegación</string>
+    <string name="sample_navigation_components">Componentes</string>
+</resources>
