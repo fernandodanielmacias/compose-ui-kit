@@ -1,5 +1,6 @@
 package io.github.ordonovus.sample.ui
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
@@ -13,6 +14,7 @@ import androidx.compose.ui.Modifier
 import io.github.ordonovus.theme.UiDimensMedium
 import io.github.ordonovus.theme.UiDimensNone
 import io.github.ordonovus.theme.UiDimensSmall
+import io.github.ordonovus.theme.UiStrokeThin
 
 /**
  * Displays a reusable section for component demonstrations.
@@ -21,8 +23,8 @@ import io.github.ordonovus.theme.UiDimensSmall
  * themed surface for displaying interactive component examples.
  *
  * @param title Title of the demonstration section.
- * @param description Optional description of the demonstrated behavior.
  * @param modifier Modifier applied to the section.
+ * @param description Optional description of the demonstrated behavior.
  * @param content Composable examples displayed inside the section.
  */
 @Composable
@@ -32,6 +34,8 @@ fun SampleSection(
     description: String? = null,
     content: @Composable ColumnScope.() -> Unit
 ) {
+    val colorScheme = MaterialTheme.colorScheme
+
     Column(
         modifier = modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(UiDimensSmall)
@@ -39,22 +43,26 @@ fun SampleSection(
         Text(
             text = title,
             style = MaterialTheme.typography.titleMedium,
-            color = MaterialTheme.colorScheme.onSurface
+            color = colorScheme.onSurface
         )
 
         if (!description.isNullOrBlank()) {
             Text(
                 text = description,
                 style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
+                color = colorScheme.onSurfaceVariant
             )
         }
 
         Surface(
             modifier = Modifier.fillMaxWidth(),
-            shape = MaterialTheme.shapes.medium,
+            shape = MaterialTheme.shapes.large,
             color = MaterialTheme.colorScheme.surfaceContainerHigh,
-            tonalElevation = UiDimensNone
+            tonalElevation = UiDimensNone,
+            border = BorderStroke(
+                width = UiStrokeThin,
+                color = colorScheme.outlineVariant.copy(alpha = 0.5f)
+            )
         ) {
             Column(
                 modifier = Modifier.padding(UiDimensMedium),
