@@ -90,13 +90,14 @@ internal fun SampleTopAppBar(
                     }
                 }
             },
-
             actions = {
                 Row(
                     modifier = Modifier.padding(end = UiDimensMedium),
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.spacedBy(UiDimensSmall)
                 ) {
+                    SampleLanguageSelector()
+
                     SampleThemeSelector(
                         selectedMode = selectedThemeMode,
                         onModeSelected = onThemeModeSelected
