@@ -1,6 +1,7 @@
 package io.github.ordonovus.sample.component.button
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -24,11 +25,13 @@ import io.github.ordonovus.sample.ui.SamplePreview
 import io.github.ordonovus.sample.ui.SampleSection
 import io.github.ordonovus.theme.UiDimensLarge
 import io.github.ordonovus.theme.UiDimensMedium
+import io.github.ordonovus.theme.UiDimensSmall
 
 /**
  * Displays the button component showcase used by the sample module.
  *
  * Examples are organized by variant, state, and layout behavior.
+ * Button variants use an adaptive flow layout.
  */
 @Composable
 fun UiButtonSample() {
@@ -39,56 +42,93 @@ fun UiButtonSample() {
     ) {
         item {
             SampleComponentHeader(
-                title = stringResource(R.string.sample_buttons_title),
-                description = stringResource(R.string.sample_buttons_description)
+                title = stringResource(R.string.button_title),
+                description = stringResource(R.string.button_description),
+                demo = {
+                    UiButtonHeaderDemo()
+                }
             )
         }
 
         item {
             SampleSection(
-                title = stringResource(R.string.sample_buttons_variants_title),
-                description = stringResource(R.string.sample_buttons_variants_description)
+                title = stringResource(
+                    R.string.sample_buttons_variants_title
+                ),
+                description = stringResource(
+                    R.string.sample_buttons_variants_description
+                )
             ) {
-                UiButton(onClick = {}) {
-                    Text(stringResource(R.string.sample_button_filled))
-                }
+                FlowRow(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(
+                        UiDimensSmall
+                    ),
+                    verticalArrangement = Arrangement.spacedBy(
+                        UiDimensSmall
+                    )
+                ) {
+                    UiButton(onClick = {}) {
+                        Text(
+                            stringResource(R.string.sample_button_filled)
+                        )
+                    }
 
-                UiFilledTonalButton(onClick = {}) {
-                    Text(stringResource(R.string.sample_button_filled_tonal))
-                }
+                    UiElevatedButton(onClick = {}) {
+                        Text(
+                            stringResource(R.string.sample_button_elevated)
+                        )
+                    }
 
-                UiElevatedButton(onClick = {}) {
-                    Text(stringResource(R.string.sample_button_elevated))
-                }
+                    UiOutlinedButton(onClick = {}) {
+                        Text(
+                            stringResource(R.string.sample_button_outlined)
+                        )
+                    }
 
-                UiOutlinedButton(onClick = {}) {
-                    Text(stringResource(R.string.sample_button_outlined))
-                }
+                    UiFilledTonalButton(onClick = {}) {
+                        Text(
+                            stringResource(R.string.sample_button_filled_tonal)
+                        )
+                    }
 
-                UiTextButton(onClick = {}) {
-                    Text(stringResource(R.string.sample_button_text))
+                    UiTextButton(onClick = {}) {
+                        Text(
+                            stringResource(R.string.sample_button_text)
+                        )
+                    }
                 }
             }
         }
 
         item {
             SampleSection(
-                title = stringResource(R.string.sample_buttons_states_title),
-                description = stringResource(R.string.sample_buttons_states_description)
+                title = stringResource(
+                    R.string.sample_buttons_states_title
+                ),
+                description = stringResource(
+                    R.string.sample_buttons_states_description
+                )
             ) {
                 UiButton(
                     onClick = {},
                     enabled = false
                 ) {
-                    Text(stringResource(R.string.sample_button_disabled))
+                    Text(
+                        stringResource(R.string.sample_button_disabled)
+                    )
                 }
             }
         }
 
         item {
             SampleSection(
-                title = stringResource(R.string.sample_buttons_icons_title),
-                description = stringResource(R.string.sample_buttons_icons_description)
+                title = stringResource(
+                    R.string.sample_buttons_icons_title
+                ),
+                description = stringResource(
+                    R.string.sample_buttons_icons_description
+                )
             ) {
                 UiButton(onClick = {}) {
                     Icon(
@@ -96,30 +136,37 @@ fun UiButtonSample() {
                         contentDescription = null
                     )
 
-                    Text(stringResource(R.string.sample_button_save))
+                    Text(
+                        stringResource(R.string.sample_button_save)
+                    )
                 }
             }
         }
 
         item {
             SampleSection(
-                title = stringResource(R.string.sample_buttons_layout_title),
-                description = stringResource(R.string.sample_buttons_layout_description)
+                title = stringResource(
+                    R.string.sample_buttons_layout_title
+                ),
+                description = stringResource(
+                    R.string.sample_buttons_layout_description
+                )
             ) {
                 UiButton(
                     modifier = Modifier.fillMaxWidth(),
                     onClick = {}
                 ) {
-                    Text(stringResource(R.string.sample_button_full_width))
+                    Text(
+                        stringResource(R.string.sample_button_full_width)
+                    )
                 }
             }
         }
-
     }
 }
 
 /**
- * Previews all button variants using the light theme.
+ * Previews the button showcase using the light theme.
  */
 @Preview(
     name = "Buttons - Light",
@@ -135,7 +182,7 @@ private fun UiButtonSampleLightPreview() {
 }
 
 /**
- * Previews all button variants using the dark theme.
+ * Previews the button showcase using the dark theme.
  */
 @Preview(
     name = "Buttons - Dark",

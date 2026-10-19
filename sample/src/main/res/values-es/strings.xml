@@ -119,7 +119,7 @@
 
     <!-- Catalog branding -->
     <string name="sample_catalog_title">Compose UI Kit</string>
-    <string name="sample_catalog_description">Explora componentes reutilizables de Compose</string>
+    <string name="sample_catalog_description">Componentes para Android</string>
 
     <!-- Navigation controls -->
     <string name="sample_navigation_menu">Abrir menú de navegación</string>
@@ -153,5 +153,23 @@
     <!-- Navigation actions -->
     <string name="sample_navigation_open">Abrir menú lateral</string>
     <string name="sample_navigation_close">Cerrar menú lateral</string>
+
+    <!-- Component header -->
+    <string name="component_header_material3">Material 3</string>
+
+    <!-- Button component -->
+    <string name="button_title">Botones</string>
+    <string name="button_description">Variantes, estados y configuraciones de botones.</string>
+
+    <!-- Button header demonstration -->
+    <string name="button_header_profile_title">Editar perfil</string>
+    <string name="button_header_name_label">Nombre</string>
+    <string name="button_header_name_placeholder">Escribe tu nombre</string>
+    <string name="button_header_cancel">Cancelar</string>
+    <string name="button_header_save">Guardar</string>
+
+    <!-- Button header interaction -->
+    <string name="button_header_saved_message">Cambios guardados correctamente.</string>
+    <string name="button_header_canceled_message">Se restauró el último nombre guardado.</string>
 
 </resources>

@@ -1,8 +1,10 @@
 package io.github.ordonovus.sample.screen
 
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.MaterialTheme
@@ -11,11 +13,15 @@ import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.PermanentDrawerSheet
 import androidx.compose.material3.PermanentNavigationDrawer
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Surface
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -28,6 +34,7 @@ import io.github.ordonovus.sample.catalog.SampleContent
 import io.github.ordonovus.sample.navigation.SampleNavigationDrawer
 import io.github.ordonovus.sample.navigation.SampleTopAppBar
 import io.github.ordonovus.sample.settings.SampleThemeMode
+import io.github.ordonovus.sample.ui.LocalSampleSnackbarHostState
 import io.github.ordonovus.sample.ui.SampleDrawerWidth
 import io.github.ordonovus.sample.ui.SamplePermanentDrawerBreakpoint
 import kotlinx.coroutines.launch
@@ -59,41 +66,34 @@ fun MainScreen(
         windowWidth >= SamplePermanentDrawerBreakpoint
 
     if (usePermanentDrawer) {
-        if (isDrawerExpanded) {
-            PermanentNavigationDrawer(
-                drawerContent = {
+        PermanentNavigationDrawer(
+            drawerContent = {
+                if (isDrawerExpanded) {
                     PermanentDrawerSheet(
-                        modifier = Modifier.width(SampleDrawerWidth)
+                        modifier = Modifier.width(SampleDrawerWidth),
+                        drawerContainerColor =
+                            MaterialTheme.colorScheme.surfaceContainerLow,
+                        windowInsets = WindowInsets.statusBars
                     ) {
                         SampleNavigationDrawer(
                             selectedSample = selectedSample,
-                            onSampleSelected = { selectedSample = it }
+                            onSampleSelected = {
+                                selectedSample = it
+                            }
                         )
                     }
                 }
-            ) {
-                SampleScreenContent(
-                    selectedSample = selectedSample,
-                    showMenuButton = true,
-                    isPermanentDrawer = true,
-                    isDrawerExpanded = isDrawerExpanded,
-                    selectedThemeMode = selectedThemeMode,
-                    onThemeModeSelected = onThemeModeSelected,
-                    onMenuClick = {
-                        isDrawerExpanded = false
-                    }
-                )
             }
-        } else {
+        ) {
             SampleScreenContent(
                 selectedSample = selectedSample,
                 showMenuButton = true,
                 isPermanentDrawer = true,
-                isDrawerExpanded = false,
+                isDrawerExpanded = isDrawerExpanded,
                 selectedThemeMode = selectedThemeMode,
                 onThemeModeSelected = onThemeModeSelected,
                 onMenuClick = {
-                    isDrawerExpanded = true
+                    isDrawerExpanded = !isDrawerExpanded
                 }
             )
         }
@@ -106,7 +106,9 @@ fun MainScreen(
         ModalNavigationDrawer(
             drawerState = drawerState,
             drawerContent = {
-                ModalDrawerSheet {
+                ModalDrawerSheet(
+                    drawerContainerColor = MaterialTheme.colorScheme.surfaceContainerLow
+                ) {
                     SampleNavigationDrawer(
                         selectedSample = selectedSample,
                         onSampleSelected = { component ->
@@ -134,8 +136,19 @@ fun MainScreen(
     }
 }
 
+
 /**
  * Displays the selected sample within the common application layout.
+ *
+ * Provides a shared snackbar host to contextual component demonstrations.
+ *
+ * @param selectedSample Currently selected sample component.
+ * @param showMenuButton Whether the navigation menu button is displayed.
+ * @param isPermanentDrawer Whether permanent drawer navigation is available.
+ * @param isDrawerExpanded Whether the permanent drawer is expanded.
+ * @param selectedThemeMode Currently selected appearance mode.
+ * @param onThemeModeSelected Called when the appearance mode changes.
+ * @param onMenuClick Called when the navigation menu button is pressed.
  */
 @Composable
 private fun SampleScreenContent(
@@ -147,29 +160,42 @@ private fun SampleScreenContent(
     onThemeModeSelected: (SampleThemeMode) -> Unit,
     onMenuClick: () -> Unit = {}
 ) {
-    Scaffold(
-        modifier = Modifier.fillMaxSize(),
-        containerColor = MaterialTheme.colorScheme.background,
-        topBar = {
-            SampleTopAppBar(
-                selectedSample = selectedSample,
-                showMenuButton = showMenuButton,
-                isPermanentDrawer = isPermanentDrawer,
-                isDrawerExpanded = isDrawerExpanded,
-                selectedThemeMode = selectedThemeMode,
-                onThemeModeSelected = onThemeModeSelected,
-                onMenuClick = onMenuClick
-            )
-        }
-    ) { innerPadding ->
-        Surface(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding)
-                .consumeWindowInsets(innerPadding),
-            color = MaterialTheme.colorScheme.background
-        ) {
-            SampleContent(component = selectedSample)
+    val snackbarHostState = remember { SnackbarHostState() }
+
+    CompositionLocalProvider(
+        LocalSampleSnackbarHostState provides snackbarHostState
+    ) {
+        Scaffold(
+            modifier = Modifier.fillMaxSize(),
+            containerColor = MaterialTheme.colorScheme.background,
+            snackbarHost = {
+                SnackbarHost(
+                    hostState = snackbarHostState
+                )
+            },
+            topBar = {
+                SampleTopAppBar(
+                    selectedSample = selectedSample,
+                    showMenuButton = showMenuButton,
+                    isPermanentDrawer = isPermanentDrawer,
+                    isDrawerExpanded = isDrawerExpanded,
+                    selectedThemeMode = selectedThemeMode,
+                    onThemeModeSelected = onThemeModeSelected,
+                    onMenuClick = onMenuClick
+                )
+            }
+        ) { innerPadding ->
+            Surface(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(innerPadding)
+                    .consumeWindowInsets(innerPadding),
+                color = MaterialTheme.colorScheme.background
+            ) {
+                SampleContent(
+                    component = selectedSample
+                )
+            }
         }
     }
 }

@@ -122,7 +122,7 @@
 
     <!-- Catalog branding -->
     <string name="sample_catalog_title">Compose UI Kit</string>
-    <string name="sample_catalog_description">Explore reusable Compose components</string>
+    <string name="sample_catalog_description">Components for Android</string>
 
     <!-- Navigation controls -->
     <string name="sample_navigation_menu">Open navigation menu</string>
@@ -156,5 +156,23 @@
     <!-- Navigation actions -->
     <string name="sample_navigation_open">Open navigation drawer</string>
     <string name="sample_navigation_close">Close navigation drawer</string>
+
+    <!-- Component header -->
+    <string name="component_header_material3">Material 3</string>
+
+    <!-- Button component -->
+    <string name="button_title">Buttons</string>
+    <string name="button_description">Button variants, states, and configurations.</string>
+
+    <!-- Button header demonstration -->
+    <string name="button_header_profile_title">Edit profile</string>
+    <string name="button_header_name_label">Name</string>
+    <string name="button_header_name_placeholder">Enter your name</string>
+    <string name="button_header_cancel">Cancel</string>
+    <string name="button_header_save">Save</string>
+
+    <!-- Button header interaction -->
+    <string name="button_header_saved_message">Changes saved successfully.</string>
+    <string name="button_header_canceled_message">The last saved name has been restored.</string>
 
 </resources>

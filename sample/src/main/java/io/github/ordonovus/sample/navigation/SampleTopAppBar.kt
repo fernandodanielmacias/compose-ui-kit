@@ -7,9 +7,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.MenuOpen
-import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -26,6 +23,7 @@ import androidx.compose.ui.res.stringResource
 import io.github.ordonovus.sample.R
 import io.github.ordonovus.sample.catalog.SampleComponent
 import io.github.ordonovus.sample.settings.SampleThemeMode
+import io.github.ordonovus.sample.ui.SampleHeaderHeight
 import io.github.ordonovus.theme.UiDimensLarge
 import io.github.ordonovus.theme.UiDimensMedium
 import io.github.ordonovus.theme.UiDimensSmall
@@ -109,7 +107,8 @@ internal fun SampleTopAppBar(
                 titleContentColor = colorScheme.onSurface,
                 navigationIconContentColor = colorScheme.onSurface,
                 actionIconContentColor = colorScheme.onSurface
-            )
+            ),
+            expandedHeight = SampleHeaderHeight
         )
 
         HorizontalDivider(

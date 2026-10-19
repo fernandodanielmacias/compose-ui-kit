@@ -1,9 +1,7 @@
 package io.github.ordonovus.sample.navigation
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -16,17 +14,15 @@ import androidx.compose.material3.NavigationDrawerItem
 import androidx.compose.material3.NavigationDrawerItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import io.github.ordonovus.sample.R
 import io.github.ordonovus.sample.catalog.SampleComponent
 import io.github.ordonovus.theme.UiDimensLarge
 import io.github.ordonovus.theme.UiDimensMedium
 import io.github.ordonovus.theme.UiDimensSmall
 import io.github.ordonovus.theme.UiDimensXLarge
+import io.github.ordonovus.theme.UiStrokeThin
 
 /**
  * Displays the navigation destinations available in the sample catalog.
@@ -39,43 +35,19 @@ internal fun SampleNavigationDrawer(
     selectedSample: SampleComponent,
     onSampleSelected: (SampleComponent) -> Unit
 ) {
+    val colorScheme = MaterialTheme.colorScheme
+
     Column(
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(colorScheme.surfaceContainerLow)
     ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(
-                    horizontal = UiDimensLarge,
-                    vertical = UiDimensXLarge
-                ),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(UiDimensMedium)
-        ) {
-            Image(
-                painter = painterResource(R.drawable.ic_ui_kit),
-                contentDescription = null,
-                modifier = Modifier.size(56.dp)
-            )
+        SampleBrandHeader()
 
-            Column(
-                verticalArrangement = Arrangement.spacedBy(UiDimensSmall)
-            ) {
-                Text(
-                    text = stringResource(R.string.sample_catalog_title),
-                    style = MaterialTheme.typography.titleLarge,
-                    color = MaterialTheme.colorScheme.onSurface
-                )
-
-                Text(
-                    text = stringResource(R.string.sample_catalog_description),
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
-            }
-        }
-
-        HorizontalDivider()
+        HorizontalDivider(
+            thickness = UiStrokeThin,
+            color = colorScheme.outlineVariant.copy(alpha = 0.5f)
+        )
 
         Text(
             text = stringResource(R.string.sample_navigation_components),
@@ -84,8 +56,8 @@ internal fun SampleNavigationDrawer(
                 top = UiDimensLarge,
                 bottom = UiDimensSmall
             ),
-            style = MaterialTheme.typography.labelLarge,
-            color = MaterialTheme.colorScheme.onSurfaceVariant
+            style = MaterialTheme.typography.labelMedium,
+            color = colorScheme.primary
         )
 
         SampleComponent.entries.forEach { component ->
@@ -93,10 +65,15 @@ internal fun SampleNavigationDrawer(
 
             NavigationDrawerItem(
                 label = {
-                    Text(text = stringResource(component.titleRes))
+                    Text(
+                        text = stringResource(component.titleRes),
+                        style = MaterialTheme.typography.bodyLarge
+                    )
                 },
                 selected = isSelected,
-                onClick = { onSampleSelected(component) },
+                onClick = {
+                    onSampleSelected(component)
+                },
                 icon = {
                     Icon(
                         imageVector = component.icon,
@@ -113,14 +90,18 @@ internal fun SampleNavigationDrawer(
                     }
                 },
                 modifier = Modifier.padding(
-                    horizontal = UiDimensSmall,
+                    horizontal = UiDimensMedium,
                     vertical = UiDimensSmall
                 ),
-                shape = MaterialTheme.shapes.medium,
+                shape = MaterialTheme.shapes.large,
                 colors = NavigationDrawerItemDefaults.colors(
-                    selectedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
-                    selectedTextColor = MaterialTheme.colorScheme.onSecondaryContainer,
-                    selectedIconColor = MaterialTheme.colorScheme.onSecondaryContainer
+                    selectedContainerColor = colorScheme.primaryContainer,
+                    selectedTextColor = colorScheme.onPrimaryContainer,
+                    selectedIconColor = colorScheme.primary,
+                    selectedBadgeColor = colorScheme.primary,
+                    unselectedContainerColor = colorScheme.surfaceContainerLow,
+                    unselectedTextColor = colorScheme.onSurfaceVariant,
+                    unselectedIconColor = colorScheme.onSurfaceVariant
                 )
             )
         }

@@ -19,8 +19,8 @@ import io.github.ordonovus.theme.UiStrokeThin
 /**
  * Displays a reusable section for component demonstrations.
  *
- * Each section contains a title, an optional description, and a
- * themed surface for displaying interactive component examples.
+ * Groups the title, optional description, and interactive examples
+ * inside a themed card with a dedicated example container.
  *
  * @param title Title of the demonstration section.
  * @param modifier Modifier applied to the section.
@@ -36,39 +36,58 @@ fun SampleSection(
 ) {
     val colorScheme = MaterialTheme.colorScheme
 
-    Column(
+    Surface(
         modifier = modifier.fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(UiDimensSmall)
-    ) {
-        Text(
-            text = title,
-            style = MaterialTheme.typography.titleMedium,
-            color = colorScheme.onSurface
+        shape = MaterialTheme.shapes.large,
+        color = colorScheme.surfaceContainerLow,
+        tonalElevation = UiDimensNone,
+        border = BorderStroke(
+            width = UiStrokeThin,
+            color = colorScheme.outlineVariant.copy(alpha = 0.5f)
         )
-
-        if (!description.isNullOrBlank()) {
-            Text(
-                text = description,
-                style = MaterialTheme.typography.bodySmall,
-                color = colorScheme.onSurfaceVariant
-            )
-        }
-
-        Surface(
-            modifier = Modifier.fillMaxWidth(),
-            shape = MaterialTheme.shapes.large,
-            color = MaterialTheme.colorScheme.surfaceContainerHigh,
-            tonalElevation = UiDimensNone,
-            border = BorderStroke(
-                width = UiStrokeThin,
-                color = colorScheme.outlineVariant.copy(alpha = 0.5f)
-            )
+    ) {
+        Column(
+            modifier = Modifier.padding(UiDimensMedium),
+            verticalArrangement = Arrangement.spacedBy(UiDimensMedium)
         ) {
             Column(
-                modifier = Modifier.padding(UiDimensMedium),
-                verticalArrangement = Arrangement.spacedBy(UiDimensMedium),
-                content = content
-            )
+                verticalArrangement = Arrangement.spacedBy(UiDimensSmall)
+            ) {
+                Text(
+                    text = title,
+                    style = MaterialTheme.typography.titleLarge,
+                    color = colorScheme.onSurface
+                )
+
+                if (!description.isNullOrBlank()) {
+                    Text(
+                        text = description,
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = colorScheme.onSurfaceVariant
+                    )
+                }
+            }
+
+            Surface(
+                modifier = Modifier.fillMaxWidth(),
+                shape = MaterialTheme.shapes.medium,
+                color = colorScheme.surfaceContainer,
+                tonalElevation = UiDimensNone,
+                border = BorderStroke(
+                    width = UiStrokeThin,
+                    color = colorScheme.outlineVariant.copy(
+                        alpha = 0.35f
+                    )
+                )
+            ) {
+                Column(
+                    modifier = Modifier.padding(UiDimensMedium),
+                    verticalArrangement = Arrangement.spacedBy(
+                        UiDimensMedium
+                    ),
+                    content = content
+                )
+            }
         }
     }
 }
