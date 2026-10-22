@@ -23,7 +23,7 @@ import androidx.compose.ui.res.stringResource
 import io.github.ordonovus.sample.R
 import io.github.ordonovus.sample.catalog.SampleComponent
 import io.github.ordonovus.sample.settings.SampleThemeMode
-import io.github.ordonovus.sample.ui.SampleHeaderHeight
+import io.github.ordonovus.sample.ui.layout.SampleHeaderHeight
 import io.github.ordonovus.theme.UiDimensLarge
 import io.github.ordonovus.theme.UiDimensMedium
 import io.github.ordonovus.theme.UiDimensSmall

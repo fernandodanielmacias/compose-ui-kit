@@ -175,4 +175,77 @@
     <string name="button_header_saved_message">Changes saved successfully.</string>
     <string name="button_header_canceled_message">The last saved name has been restored.</string>
 
+    <!-- Text field header demo -->
+    <string name="text_field_header_email_label">Email address</string>
+    <string name="text_field_header_email_placeholder">name@example.com</string>
+    <string name="text_field_header_email_error">Enter a valid email address.</string>
+    <string name="text_field_header_validate">Validate</string>
+    <string name="text_field_header_success_message">Valid email address.</string>
+
+    <!-- Destructive button variants -->
+    <string name="sample_button_destructive_title">Destructive actions</string>
+    <string name="sample_button_destructive_description">Buttons with semantic colors for deleting information or performing irreversible actions.</string>
+    <string name="sample_button_delete">Delete</string>
+    <string name="sample_button_delete_tonal">Delete (tonal)</string>
+
+    <string name="sample_buttons_customization_title">Customization</string>
+    <string name="sample_buttons_customization_description">Buttons support custom shapes and borders using the design system styles.</string>
+    <string name="sample_button_rounded">Rounded</string>
+    <string name="sample_button_cut">Cut corners</string>
+    <string name="sample_button_square">Square</string>
+    <string name="sample_button_custom_border">Custom border</string>
+
+    <!-- Button interaction messages -->
+    <string name="sample_button_filled_clicked">Filled button clicked</string>
+    <string name="sample_button_elevated_clicked">Elevated button clicked</string>
+    <string name="sample_button_outlined_clicked">Outlined button clicked</string>
+    <string name="sample_button_tonal_clicked">Tonal button clicked</string>
+    <string name="sample_button_text_clicked">Text button clicked</string>
+    <string name="sample_button_save_clicked">Save action executed</string>
+    <string name="sample_button_full_width_clicked">Full-width button clicked</string>
+    <string name="sample_button_rounded_clicked">Rounded button clicked</string>
+    <string name="sample_button_cut_clicked">Cut-corner button clicked</string>
+    <string name="sample_button_square_clicked">Square button clicked</string>
+    <string name="sample_button_border_clicked">Custom border button clicked</string>
+    <string name="sample_button_destructive_clicked">Demo only: no information was deleted</string>
+
+    <!-- Interactive demonstration of the Text Fields component -->
+    <string name="sample_textfield_demo_title">Email validation</string>
+
+    <!-- Text fields: icons, actions, and supporting text -->
+    <string name="sample_text_fields_icons_title">Icons and actions</string>
+    <string name="sample_text_fields_icons_description">Fields with icons, clear actions, and supporting messages.</string>
+    <string name="sample_text_fields_search_label">Search</string>
+    <string name="sample_text_fields_search_placeholder">Type to search</string>
+    <string name="sample_text_fields_username_label">Username</string>
+    <string name="sample_text_fields_username_supporting">Enter a username for your profile.</string>
+
+    <!-- Text fields: prefixes and suffixes -->
+    <string name="sample_text_fields_affixes_title">Prefixes and suffixes</string>
+    <string name="sample_text_fields_affixes_description">Fields with symbols and units alongside the text.</string>
+    <string name="sample_text_fields_price_label">Price</string>
+    <string name="sample_text_fields_currency_prefix">$</string>
+    <string name="sample_text_fields_weight_label">Weight</string>
+    <string name="sample_text_fields_weight_suffix">kg</string>
+
+    <!-- Text fields: input and output transformations -->
+    <string name="sample_text_fields_transformations_title">Text transformations</string>
+    <string name="sample_text_fields_transformations_description">Input filtering and visual formatting without changing the stored value.</string>
+    <string name="sample_text_fields_digits_only_label">Digits only</string>
+    <string name="sample_text_fields_digits_only_supporting">Accepts digits only, up to a maximum of 8.</string>
+    <string name="sample_text_fields_formatted_label">Formatted number</string>
+    <string name="sample_text_fields_formatted_supporting">Visually groups digits into blocks of four.</string>
+
+    <!-- Text fields: shape, color, and border customization -->
+    <string name="sample_text_fields_customization_title">Customization</string>
+    <string name="sample_text_fields_customization_description">Custom shapes, colors, and border thicknesses.</string>
+    <string name="sample_text_fields_custom_outlined_label">Custom outlined</string>
+    <string name="sample_text_fields_custom_filled_label">Custom filled</string>
+    <string name="sample_text_fields_custom_placeholder">Enter a value</string>
+
+    <!-- Text fields: keyboard actions and custom icons -->
+    <string name="sample_text_fields_search_feedback">Search action triggered</string>
+    <string name="sample_text_fields_verified_label">Custom trailing icon</string>
+    <string name="sample_text_fields_verified_placeholder">Enter a value</string>
+
 </resources>

@@ -1,4 +1,4 @@
-package io.github.ordonovus.sample.ui
+package io.github.ordonovus.sample.ui.feedback
 
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.compositionLocalOf

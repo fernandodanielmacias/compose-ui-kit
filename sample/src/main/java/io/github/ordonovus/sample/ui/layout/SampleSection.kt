@@ -1,4 +1,4 @@
-package io.github.ordonovus.sample.ui
+package io.github.ordonovus.sample.ui.layout
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement

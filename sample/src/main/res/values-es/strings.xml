@@ -172,4 +172,77 @@
     <string name="button_header_saved_message">Cambios guardados correctamente.</string>
     <string name="button_header_canceled_message">Se restauró el último nombre guardado.</string>
 
+    <!-- Text field header demo -->
+    <string name="text_field_header_email_label">Correo electrónico</string>
+    <string name="text_field_header_email_placeholder">nombre@ejemplo.com</string>
+    <string name="text_field_header_email_error">Introduce un correo electrónico válido.</string>
+    <string name="text_field_header_validate">Validar</string>
+    <string name="text_field_header_success_message">Correo electrónico válido.</string>
+
+    <!-- Destructive button variants -->
+    <string name="sample_button_destructive_title">Acciones destructivas</string>
+    <string name="sample_button_destructive_description">Botones con colores semánticos para eliminar información o realizar acciones irreversibles.</string>
+    <string name="sample_button_delete">Eliminar</string>
+    <string name="sample_button_delete_tonal">Eliminar (tonal)</string>
+
+    <string name="sample_buttons_customization_title">Personalización</string>
+    <string name="sample_buttons_customization_description">Los botones permiten modificar su forma y borde utilizando los estilos del sistema de diseño.</string>
+    <string name="sample_button_rounded">Redondeado</string>
+    <string name="sample_button_cut">Recortado</string>
+    <string name="sample_button_square">Cuadrado</string>
+    <string name="sample_button_custom_border">Borde personalizado</string>
+
+    <!-- Button interaction messages -->
+    <string name="sample_button_filled_clicked">Botón principal pulsado</string>
+    <string name="sample_button_elevated_clicked">Botón elevado pulsado</string>
+    <string name="sample_button_outlined_clicked">Botón con contorno pulsado</string>
+    <string name="sample_button_tonal_clicked">Botón tonal pulsado</string>
+    <string name="sample_button_text_clicked">Botón de texto pulsado</string>
+    <string name="sample_button_save_clicked">Acción de guardar ejecutada</string>
+    <string name="sample_button_full_width_clicked">Botón de ancho completo pulsado</string>
+    <string name="sample_button_rounded_clicked">Botón redondeado pulsado</string>
+    <string name="sample_button_cut_clicked">Botón recortado pulsado</string>
+    <string name="sample_button_square_clicked">Botón cuadrado pulsado</string>
+    <string name="sample_button_border_clicked">Botón con borde personalizado pulsado</string>
+    <string name="sample_button_destructive_clicked">Demostración: no se eliminó información</string>
+
+    <!-- Demostración interactiva del componente Campos de texto -->
+    <string name="sample_textfield_demo_title">Validación de correo</string>
+
+    <!-- Campos de texto: iconos, acciones y texto auxiliar -->
+    <string name="sample_text_fields_icons_title">Iconos y acciones</string>
+    <string name="sample_text_fields_icons_description">Campos con iconos, limpieza de contenido y mensajes auxiliares.</string>
+    <string name="sample_text_fields_search_label">Buscar</string>
+    <string name="sample_text_fields_search_placeholder">Escribe para buscar</string>
+    <string name="sample_text_fields_username_label">Usuario</string>
+    <string name="sample_text_fields_username_supporting">Introduce un nombre de usuario para tu perfil.</string>
+
+    <!-- Campos de texto: prefijos y sufijos -->
+    <string name="sample_text_fields_affixes_title">Prefijos y sufijos</string>
+    <string name="sample_text_fields_affixes_description">Campos con símbolos y unidades junto al texto.</string>
+    <string name="sample_text_fields_price_label">Precio</string>
+    <string name="sample_text_fields_currency_prefix">$</string>
+    <string name="sample_text_fields_weight_label">Peso</string>
+    <string name="sample_text_fields_weight_suffix">kg</string>
+
+    <!-- Campos de texto: transformaciones de entrada y salida -->
+    <string name="sample_text_fields_transformations_title">Transformaciones de texto</string>
+    <string name="sample_text_fields_transformations_description">Filtrado de entrada y formato visual sin modificar el valor almacenado.</string>
+    <string name="sample_text_fields_digits_only_label">Solo números</string>
+    <string name="sample_text_fields_digits_only_supporting">Acepta únicamente dígitos, hasta un máximo de 8.</string>
+    <string name="sample_text_fields_formatted_label">Número con formato</string>
+    <string name="sample_text_fields_formatted_supporting">Agrupa los dígitos visualmente en bloques de cuatro.</string>
+
+    <!-- Campos de texto: personalización de formas, colores y bordes -->
+    <string name="sample_text_fields_customization_title">Personalización</string>
+    <string name="sample_text_fields_customization_description">Formas, colores y grosores personalizados.</string>
+    <string name="sample_text_fields_custom_outlined_label">Contorno personalizado</string>
+    <string name="sample_text_fields_custom_filled_label">Relleno personalizado</string>
+    <string name="sample_text_fields_custom_placeholder">Escribe un valor</string>
+
+    <!-- Campos de texto: acciones de teclado e iconos personalizados -->
+    <string name="sample_text_fields_search_feedback">Acción de búsqueda ejecutada</string>
+    <string name="sample_text_fields_verified_label">Icono personalizado</string>
+    <string name="sample_text_fields_verified_placeholder">Escribe un valor</string>
+
 </resources>

@@ -1,15 +1,11 @@
 package io.github.ordonovus.sample.component.button
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.input.rememberTextFieldState
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -21,15 +17,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import io.github.ordonovus.component.button.UiButton
-import io.github.ordonovus.component.button.UiOutlinedButton
-import io.github.ordonovus.component.textfield.UiTextField
+import io.github.ordonovus.component.button.UiFilledTonalButton
+import io.github.ordonovus.component.text.UiText
+import io.github.ordonovus.component.textfield.UiOutlinedTextField
 import io.github.ordonovus.sample.R
-import io.github.ordonovus.sample.ui.LocalSampleSnackbarHostState
-import io.github.ordonovus.sample.ui.SampleButtonHeaderNameMaxLength
+import io.github.ordonovus.sample.ui.feedback.LocalSampleSnackbarHostState
+import io.github.ordonovus.sample.ui.layout.SampleButtonHeaderNameMaxLength
+import io.github.ordonovus.sample.ui.layout.SampleDemoContainer
+import io.github.ordonovus.sample.ui.feedback.showSampleMessage
 import io.github.ordonovus.theme.UiDimensMedium
 import io.github.ordonovus.theme.UiDimensSmall
-import io.github.ordonovus.theme.UiStrokeThin
-import kotlinx.coroutines.launch
+import io.github.ordonovus.theme.UiTypographyTitleMedium
 
 /**
  * Displays an interactive demonstration of button usage.
@@ -45,8 +43,6 @@ import kotlinx.coroutines.launch
 fun UiButtonHeaderDemo(
     modifier: Modifier = Modifier
 ) {
-    val colorScheme = MaterialTheme.colorScheme
-
     val nameState = rememberTextFieldState()
     var savedName by rememberSaveable { mutableStateOf("") }
 
@@ -79,35 +75,25 @@ fun UiButtonHeaderDemo(
         R.string.button_header_canceled_message
     )
 
-    Surface(
-        modifier = modifier.fillMaxWidth(),
-        shape = MaterialTheme.shapes.large,
-        color = colorScheme.surfaceContainerHigh,
-        border = BorderStroke(
-            width = UiStrokeThin,
-            color = colorScheme.outlineVariant
-        )
-    ) {
+    SampleDemoContainer {
         Column(
             modifier = Modifier.padding(UiDimensMedium),
-            verticalArrangement = Arrangement.spacedBy(
-                UiDimensMedium
-            )
+            verticalArrangement = Arrangement.spacedBy(UiDimensMedium)
         ) {
-            Text(
+            UiText(
                 text = profileTitle,
-                style = MaterialTheme.typography.titleMedium,
+                style = UiTypographyTitleMedium,
                 fontWeight = FontWeight.SemiBold
             )
 
-            UiTextField(
+            UiOutlinedTextField(
                 state = nameState,
                 modifier = Modifier.fillMaxWidth(),
                 label = {
-                    Text(text = nameLabel)
+                    UiText(text = nameLabel)
                 },
                 placeholder = {
-                    Text(text = namePlaceholder)
+                    UiText(text = namePlaceholder)
                 },
                 maxLength = SampleButtonHeaderNameMaxLength,
                 showClearButton = true
@@ -121,7 +107,7 @@ fun UiButtonHeaderDemo(
                 ),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                UiOutlinedButton(
+                UiFilledTonalButton(
                     onClick = {
                         if (hasChanges) {
                             nameState.edit {
@@ -132,20 +118,15 @@ fun UiButtonHeaderDemo(
                                 )
                             }
 
-                            coroutineScope.launch {
-                                snackbarHostState
-                                    ?.currentSnackbarData
-                                    ?.dismiss()
-
-                                snackbarHostState?.showSnackbar(
-                                    message = canceledMessage
-                                )
-                            }
+                            snackbarHostState.showSampleMessage(
+                                scope = coroutineScope,
+                                message = canceledMessage
+                            )
                         }
                     },
                     enabled = hasChanges
                 ) {
-                    Text(text = cancelLabel)
+                    UiText(text = cancelLabel)
                 }
 
                 UiButton(
@@ -153,20 +134,15 @@ fun UiButtonHeaderDemo(
                         if (canSave) {
                             savedName = currentName
 
-                            coroutineScope.launch {
-                                snackbarHostState
-                                    ?.currentSnackbarData
-                                    ?.dismiss()
-
-                                snackbarHostState?.showSnackbar(
-                                    message = savedMessage
-                                )
-                            }
+                            snackbarHostState.showSampleMessage(
+                                scope = coroutineScope,
+                                message = savedMessage
+                            )
                         }
                     },
                     enabled = canSave
                 ) {
-                    Text(text = saveLabel)
+                    UiText(text = saveLabel)
                 }
             }
         }

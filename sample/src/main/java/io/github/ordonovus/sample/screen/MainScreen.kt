@@ -28,15 +28,17 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalWindowInfo
+import io.github.ordonovus.component.textfield.UiTextFieldIconDefaults
+import io.github.ordonovus.component.textfield.UiTextFieldIconTheme
 import io.github.ordonovus.sample.catalog.DefaultSampleComponent
 import io.github.ordonovus.sample.catalog.SampleComponent
 import io.github.ordonovus.sample.catalog.SampleContent
 import io.github.ordonovus.sample.navigation.SampleNavigationDrawer
 import io.github.ordonovus.sample.navigation.SampleTopAppBar
 import io.github.ordonovus.sample.settings.SampleThemeMode
-import io.github.ordonovus.sample.ui.LocalSampleSnackbarHostState
-import io.github.ordonovus.sample.ui.SampleDrawerWidth
-import io.github.ordonovus.sample.ui.SamplePermanentDrawerBreakpoint
+import io.github.ordonovus.sample.ui.feedback.LocalSampleSnackbarHostState
+import io.github.ordonovus.sample.ui.layout.SampleDrawerWidth
+import io.github.ordonovus.sample.ui.layout.SamplePermanentDrawerBreakpoint
 import kotlinx.coroutines.launch
 
 /**
@@ -192,9 +194,16 @@ private fun SampleScreenContent(
                     .consumeWindowInsets(innerPadding),
                 color = MaterialTheme.colorScheme.background
             ) {
-                SampleContent(
-                    component = selectedSample
-                )
+                UiTextFieldIconTheme(
+                    colors = UiTextFieldIconDefaults.colors(
+                        action = MaterialTheme.colorScheme.primary
+                    )
+                ) {
+                    SampleContent(
+                        component = selectedSample
+                    )
+                }
+
             }
         }
     }

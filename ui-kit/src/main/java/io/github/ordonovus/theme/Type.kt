@@ -39,3 +39,8 @@ val UiTypographyBodySecondary = UiTypography.bodyMedium
  * Typography style intended for labels, buttons, and compact UI content.
  */
 val UiTypographyLabel = UiTypography.labelLarge
+
+/**
+ * Typography style intended for compact section and demonstration titles.
+ */
+val UiTypographyTitleMedium = UiTypography.titleMedium

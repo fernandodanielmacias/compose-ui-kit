@@ -23,8 +23,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.sp
 import io.github.ordonovus.sample.R
-import io.github.ordonovus.sample.ui.SampleBrandLogoSize
-import io.github.ordonovus.sample.ui.SampleHeaderHeight
+import io.github.ordonovus.sample.ui.layout.SampleBrandLogoSize
+import io.github.ordonovus.sample.ui.layout.SampleHeaderHeight
 import io.github.ordonovus.theme.UiDimensMedium
 import io.github.ordonovus.theme.UiDimensSmall
 

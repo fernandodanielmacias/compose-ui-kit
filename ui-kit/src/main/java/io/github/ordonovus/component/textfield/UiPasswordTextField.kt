@@ -38,6 +38,7 @@ private fun UiPasswordVisibilityButton(
     passwordVisible: Boolean,
     enabled: Boolean,
     contentDescription: String,
+    iconColors: UiTextFieldIconColors,
     onClick: () -> Unit
 ) {
     IconButton(
@@ -52,7 +53,8 @@ private fun UiPasswordVisibilityButton(
                     R.drawable.ic_visibility
                 }
             ),
-            contentDescription = contentDescription
+            contentDescription = contentDescription,
+            tint = if (enabled) iconColors.action else { iconColors.disabled }
         )
     }
 }
@@ -74,6 +76,11 @@ private fun UiPasswordVisibilityButton(
  * @param errorText Optional error message displayed when [isError] is `true`.
  * @param label Optional label displayed by the text field.
  * @param placeholder Optional placeholder displayed when the field is empty.
+ * @param leadingIcon Optional custom leading content. When provided, it takes
+ * precedence over the default lock icon. When `null`, the default lock icon
+ * is displayed if [showDefaultLeadingIcon] is `true`.
+ * @param showDefaultLeadingIcon Whether to display the built-in lock icon
+ * when no custom [leadingIcon] is provided. Set to `false` to hide it.
  * @param supportingText Optional supporting content displayed below the field
  * when no error message takes precedence.
  * @param maxLength Optional maximum number of characters accepted.
@@ -96,11 +103,14 @@ fun UiOutlinedPasswordTextField(
     errorText: String? = null,
     label: (@Composable TextFieldLabelScope.() -> Unit)? = null,
     placeholder: (@Composable () -> Unit)? = null,
+    leadingIcon: (@Composable () -> Unit)? = null,
+    showDefaultLeadingIcon: Boolean = true,
     supportingText: (@Composable () -> Unit)? = null,
     maxLength: Int? = null,
     showCharacterCount: Boolean = false,
     showPasswordContentDescription: String? = null,
-    hidePasswordContentDescription: String? = null
+    hidePasswordContentDescription: String? = null,
+    iconColors: UiTextFieldIconColors = UiTextFieldIconDefaults.current
 ) {
     var passwordVisible by remember {
         mutableStateOf(false)
@@ -146,6 +156,13 @@ fun UiOutlinedPasswordTextField(
         supportingText = supportingText
     )
 
+    val resolvedLeadingIcon = resolvePasswordLeadingIcon(
+        leadingIcon = leadingIcon,
+        showDefaultLeadingIcon = showDefaultLeadingIcon,
+        enabled = enabled,
+        iconColors = iconColors
+    )
+
     val colors = UiTextFieldDefaults.outlinedColors()
 
     BasicSecureTextField(
@@ -171,19 +188,25 @@ fun UiOutlinedPasswordTextField(
             interactionSource = interactionSource,
             label = label,
             placeholder = placeholder,
+            leadingIcon = resolvedLeadingIcon,
             trailingIcon = {
-                UiPasswordVisibilityButton(
-                    passwordVisible = passwordVisible,
-                    enabled = enabled && state.text.isNotEmpty(),
-                    contentDescription = if (passwordVisible) {
-                        resolvedHidePasswordContentDescription
-                    } else {
-                        resolvedShowPasswordContentDescription
-                    },
-                    onClick = {
-                        passwordVisible = !passwordVisible
-                    }
-                )
+                if (isError) {
+                    UiTextFieldErrorIcon(iconColors = iconColors)
+                } else {
+                    UiPasswordVisibilityButton(
+                        passwordVisible = passwordVisible,
+                        enabled = enabled && state.text.isNotEmpty(),
+                        contentDescription = if (passwordVisible) {
+                            resolvedHidePasswordContentDescription
+                        } else {
+                            resolvedShowPasswordContentDescription
+                        },
+                        iconColors = iconColors,
+                        onClick = {
+                            passwordVisible = !passwordVisible
+                        }
+                    )
+                }
             },
             supportingText = finalSupportingText,
             isError = isError,

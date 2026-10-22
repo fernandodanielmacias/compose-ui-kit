@@ -16,9 +16,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import io.github.ordonovus.component.text.UiText
 import io.github.ordonovus.component.text.UiTextVariant
 import io.github.ordonovus.sample.R
-import io.github.ordonovus.sample.ui.SampleComponentHeader
-import io.github.ordonovus.sample.ui.SamplePreview
-import io.github.ordonovus.sample.ui.SampleSection
+import io.github.ordonovus.sample.ui.layout.SampleComponentHeader
+import io.github.ordonovus.sample.ui.preview.SamplePreview
+import io.github.ordonovus.sample.ui.layout.SampleSection
 import io.github.ordonovus.theme.UiDimensLarge
 import io.github.ordonovus.theme.UiDimensMedium
 

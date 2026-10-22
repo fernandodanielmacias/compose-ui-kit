@@ -12,9 +12,9 @@ import io.github.ordonovus.R
 /**
  * Displays an action that clears the content of a text field.
  *
- * The action is displayed only when the text field contains text and can be
- * edited. Its appearance automatically follows the current Material theme
- * through the content color provided by [IconButton].
+ * The action is displayed only when the field contains text and is editable.
+ * Its icon uses the primary color from the active Material 3 color scheme,
+ * independently of the field's validation state.
  *
  * Disabled and read-only fields do not expose the clear action.
  *
@@ -23,13 +23,15 @@ import io.github.ordonovus.R
  * @param readOnly Whether the associated text field is read-only.
  * @param contentDescription Optional accessibility description for the clear
  * action. When `null`, the localized default description is used.
+ * @param iconColors Colors applied to the clear action icon.
  */
 @Composable
 fun UiTextFieldClearButton(
     state: TextFieldState,
     enabled: Boolean = true,
     readOnly: Boolean = false,
-    contentDescription: String? = null
+    contentDescription: String? = null,
+    iconColors: UiTextFieldIconColors = UiTextFieldIconDefaults.current
 ) {
     val resolvedContentDescription = contentDescription
         ?: stringResource(R.string.ui_text_field_clear)
@@ -43,51 +45,10 @@ fun UiTextFieldClearButton(
             }
         ) {
             Icon(
-                painter = painterResource(R.drawable.ic_close),
-                contentDescription = resolvedContentDescription
+                painter = painterResource(R.drawable.ic_cancel),
+                contentDescription = resolvedContentDescription,
+                tint = iconColors.action
             )
         }
-    }
-}
-
-/**
- * Resolves the trailing icon for a text field.
- *
- * A custom trailing icon takes precedence over the default clear action.
- * The clear action is displayed only when the field contains text and
- * allows editing.
- *
- * @param state State containing the text field value.
- * @param enabled Whether the text field is enabled.
- * @param readOnly Whether the text field is read-only.
- * @param showClearButton Whether the default clear action is enabled.
- * @param trailingIcon Optional custom trailing icon.
- * @return The resolved trailing icon, or `null` when no icon is needed.
- */
-@Composable
-internal fun resolveTextFieldTrailingIcon(
-    state: TextFieldState,
-    enabled: Boolean,
-    readOnly: Boolean,
-    showClearButton: Boolean,
-    trailingIcon: (@Composable () -> Unit)?
-): (@Composable () -> Unit)? {
-    return when {
-        trailingIcon != null -> trailingIcon
-
-        showClearButton &&
-                state.text.isNotEmpty() &&
-                enabled &&
-                !readOnly -> {
-            {
-                UiTextFieldClearButton(
-                    state = state,
-                    enabled = enabled,
-                    readOnly = readOnly
-                )
-            }
-        }
-
-        else -> null
     }
 }

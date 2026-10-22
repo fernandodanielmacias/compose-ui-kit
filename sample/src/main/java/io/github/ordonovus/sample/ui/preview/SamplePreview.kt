@@ -1,4 +1,4 @@
-package io.github.ordonovus.sample.ui
+package io.github.ordonovus.sample.ui.preview
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme

@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ButtonElevation
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
@@ -180,6 +181,38 @@ object UiButtonDefaults {
     @Composable
     fun elevatedElevation(): ButtonElevation {
         return ButtonDefaults.elevatedButtonElevation()
+    }
+
+    /**
+     * Creates colors for high-emphasis destructive actions.
+     *
+     * Uses the active Material 3 error color roles to communicate
+     * actions that may permanently remove or discard information.
+     *
+     * @return A [ButtonColors] configuration for destructive actions.
+     */
+    @Composable
+    fun destructiveColors(): ButtonColors {
+        return ButtonDefaults.buttonColors(
+            containerColor = MaterialTheme.colorScheme.error,
+            contentColor = MaterialTheme.colorScheme.onError
+        )
+    }
+
+    /**
+     * Creates colors for lower-emphasis destructive actions.
+     *
+     * Uses the active Material 3 error color roles while preserving
+     * the tonal appearance of secondary actions.
+     *
+     * @return A [ButtonColors] configuration for tonal destructive actions.
+     */
+    @Composable
+    fun destructiveTonalColors(): ButtonColors {
+        return ButtonDefaults.filledTonalButtonColors(
+            containerColor = MaterialTheme.colorScheme.errorContainer,
+            contentColor = MaterialTheme.colorScheme.onErrorContainer
+        )
     }
 
 }

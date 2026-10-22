@@ -1,6 +1,7 @@
 package io.github.ordonovus.component.textfield
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsFocusedAsState
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.text.input.InputTransformation
@@ -8,14 +9,13 @@ import androidx.compose.foundation.text.input.KeyboardActionHandler
 import androidx.compose.foundation.text.input.OutputTransformation
 import androidx.compose.foundation.text.input.TextFieldLineLimits
 import androidx.compose.foundation.text.input.TextFieldState
-import androidx.compose.foundation.text.input.maxLength
-import androidx.compose.foundation.text.input.then
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.TextFieldColors
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.TextFieldLabelScope
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
@@ -75,6 +75,7 @@ import androidx.compose.ui.unit.Dp
  * @param lineLimits Defines the minimum and maximum line behavior of the field.
  * @param shape Shape used by the text field container.
  * @param colors Colors used by the text field for its different visual states.
+ * @param iconColors Colors used by built-in text field icons.
  * @param focusedIndicatorThickness Indicator thickness used while the field
  * is focused.
  * @param unfocusedIndicatorThickness Indicator thickness used while the field
@@ -122,12 +123,13 @@ fun UiTextField(
     lineLimits: TextFieldLineLimits = TextFieldLineLimits.SingleLine,
     shape: Shape = UiTextFieldDefaults.Shape,
     colors: TextFieldColors = UiTextFieldDefaults.colors(readOnly = readOnly),
+    iconColors: UiTextFieldIconColors = UiTextFieldIconDefaults.current,
     focusedIndicatorThickness: Dp = UiTextFieldDefaults.FocusedIndicatorThickness,
     unfocusedIndicatorThickness: Dp = UiTextFieldDefaults.UnfocusedIndicatorThickness
 ) {
     val interactionSource = remember { MutableInteractionSource() }
 
-    val finalInputTransformation = createInputTransformation(
+    val finalInputTransformation = UiTextFieldTransformations.combine(
         maxLength = maxLength,
         inputTransformation = inputTransformation
     )
@@ -141,17 +143,22 @@ fun UiTextField(
         supportingText = supportingText
     )
 
+    val isFocused by interactionSource.collectIsFocusedAsState()
+
     val textColor = when {
-        !enabled -> UiTextFieldDefaults.DisabledTextColor
-        readOnly -> UiTextFieldDefaults.ReadOnlyTextColor
-        else -> UiTextFieldDefaults.TextColor
+        !enabled -> colors.disabledTextColor
+        isError -> colors.errorTextColor
+        isFocused -> colors.focusedTextColor
+        else -> colors.unfocusedTextColor
     }
 
     val resolvedTrailingIcon = resolveTextFieldTrailingIcon(
         state = state,
         enabled = enabled,
         readOnly = readOnly,
+        isError = isError,
         showClearButton = showClearButton,
+        iconColors = iconColors,
         trailingIcon = trailingIcon
     )
 
@@ -250,6 +257,7 @@ fun UiTextField(
  * @param lineLimits Defines the minimum and maximum line behavior of the field.
  * @param shape Shape used by the outlined field container.
  * @param colors Colors used by the field for its different visual states.
+ * @param iconColors Colors used by built-in text field icons.
  * @param focusedBorderThickness Border thickness used while the field is
  * focused.
  * @param unfocusedBorderThickness Border thickness used while the field is not
@@ -294,12 +302,13 @@ fun UiOutlinedTextField(
     lineLimits: TextFieldLineLimits = TextFieldLineLimits.SingleLine,
     shape: Shape = UiTextFieldDefaults.OutlinedShape,
     colors: TextFieldColors = UiTextFieldDefaults.outlinedColors(readOnly = readOnly),
+    iconColors: UiTextFieldIconColors = UiTextFieldIconDefaults.current,
     focusedBorderThickness: Dp = UiTextFieldDefaults.FocusedBorderThickness,
     unfocusedBorderThickness: Dp = UiTextFieldDefaults.UnfocusedBorderThickness
 ) {
     val interactionSource = remember { MutableInteractionSource() }
 
-    val finalInputTransformation = createInputTransformation(
+    val finalInputTransformation = UiTextFieldTransformations.combine(
         maxLength = maxLength,
         inputTransformation = inputTransformation
     )
@@ -323,7 +332,9 @@ fun UiOutlinedTextField(
         state = state,
         enabled = enabled,
         readOnly = readOnly,
+        isError = isError,
         showClearButton = showClearButton,
+        iconColors = iconColors,
         trailingIcon = trailingIcon
     )
 
@@ -369,41 +380,4 @@ fun UiOutlinedTextField(
             }
         )
     )
-}
-
-/**
- * Creates the input transformation used by text field components.
- *
- * When a maximum length is provided, the length restriction is applied before
- * the optional consumer-provided transformation.
- *
- * @param maxLength Maximum number of accepted characters, or `null` when no
- * UI Kit length restriction should be applied.
- * @param inputTransformation Optional transformation supplied by the consumer.
- *
- * @return The combined input transformation, or `null` when no transformation
- * is required.
- */
-private fun createInputTransformation(
-    maxLength: Int?,
-    inputTransformation: InputTransformation?
-): InputTransformation? {
-    require(maxLength == null || maxLength >= 0) {
-        "maxLength must be greater than or equal to zero."
-    }
-
-    val lengthTransformation = maxLength?.let {
-        InputTransformation.maxLength(it)
-    }
-
-    return when {
-        lengthTransformation != null && inputTransformation != null ->
-            lengthTransformation.then(inputTransformation)
-
-        lengthTransformation != null ->
-            lengthTransformation
-
-        else ->
-            inputTransformation
-    }
 }

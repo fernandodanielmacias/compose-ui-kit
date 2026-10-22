@@ -8,8 +8,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import io.github.ordonovus.sample.ui.SamplePreview
-import io.github.ordonovus.theme.UiKitTheme
+import io.github.ordonovus.sample.ui.preview.SamplePreview
 import io.github.ordonovus.theme.UiTypographyBody
 import io.github.ordonovus.theme.UiTypographyBodySecondary
 import io.github.ordonovus.theme.UiTypographyDisplay

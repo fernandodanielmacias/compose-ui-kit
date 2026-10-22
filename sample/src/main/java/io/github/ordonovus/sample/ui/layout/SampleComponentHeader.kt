@@ -1,4 +1,4 @@
-package io.github.ordonovus.sample.ui
+package io.github.ordonovus.sample.ui.layout
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
@@ -100,7 +100,11 @@ fun SampleComponentHeader(
                             description = description
                         )
 
-                        demo()
+                        Box(
+                            modifier = Modifier.padding(UiDimensSmall)
+                        ) {
+                            demo()
+                        }
                     }
                 } else {
                     Row(
@@ -118,7 +122,9 @@ fun SampleComponentHeader(
                         }
 
                         Box(
-                            modifier = Modifier.weight(1f),
+                            modifier = Modifier
+                                .weight(1f)
+                                .padding(UiDimensSmall),
                             contentAlignment = Alignment.TopCenter
                         ) {
                             demo()

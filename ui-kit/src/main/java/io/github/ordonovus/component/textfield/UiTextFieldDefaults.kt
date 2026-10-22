@@ -89,6 +89,15 @@ object UiTextFieldDefaults {
         @Composable get() = MaterialTheme.colorScheme.onSurface
 
     /**
+     * Color used by enabled text fields when they are not focused.
+     *
+     * Uses the active theme's primary color with reduced emphasis
+     * to distinguish editable fields from disabled fields.
+     */
+    val UnfocusedAccentColor: Color
+        @Composable get() = MaterialTheme.colorScheme.primary.copy(alpha = 0.75f)
+
+    /**
      * Creates keyboard options using Compose defaults while allowing common
      * text-input behavior to be customized from a single place.
      *
@@ -115,14 +124,12 @@ object UiTextFieldDefaults {
     /**
      * Creates the default colors for [UiTextField].
      *
-     * Material 3 provides the enabled, focused, unfocused, disabled, and error
-     * colors. When [readOnly] is `true`, this function applies dedicated
-     * read-only text and container colors while keeping the field enabled.
+     * Enabled fields use a primary-colored indicator when unfocused.
+     * Error and disabled colors remain controlled by Material 3.
      *
      * @param readOnly Whether the field is read-only.
-     * @param readOnlyTextColor Text color used when the field is read-only.
-     * @param readOnlyContainerColor Container color used when the field is
-     * read-only.
+     * @param readOnlyTextColor Text color used when read-only.
+     * @param readOnlyContainerColor Container color used when read-only.
      *
      * @return A [TextFieldColors] configuration for [UiTextField].
      */
@@ -140,20 +147,22 @@ object UiTextFieldDefaults {
                 unfocusedContainerColor = readOnlyContainerColor
             )
         } else {
-            TextFieldDefaults.colors()
+            TextFieldDefaults.colors(
+                unfocusedIndicatorColor = UnfocusedAccentColor,
+                unfocusedLabelColor = MaterialTheme.colorScheme.onSurfaceVariant
+            )
         }
     }
 
     /**
      * Creates the default colors for [UiOutlinedTextField].
      *
-     * Material 3 provides the enabled, focused, unfocused, disabled, and error
-     * colors. When [readOnly] is `true`, the text and border use dedicated
-     * read-only colors while the field remains enabled.
+     * Enabled fields use a primary-colored border when unfocused.
+     * Focused, error, and disabled states follow Material 3.
      *
      * @param readOnly Whether the field is read-only.
-     * @param readOnlyTextColor Text color used when the field is read-only.
-     * @param readOnlyBorderColor Border color used when the field is read-only.
+     * @param readOnlyTextColor Text color used when read-only.
+     * @param readOnlyBorderColor Border color used when read-only.
      *
      * @return A [TextFieldColors] configuration for [UiOutlinedTextField].
      */
@@ -171,7 +180,10 @@ object UiTextFieldDefaults {
                 unfocusedBorderColor = readOnlyBorderColor
             )
         } else {
-            OutlinedTextFieldDefaults.colors()
+            OutlinedTextFieldDefaults.colors(
+                unfocusedBorderColor = UnfocusedAccentColor,
+                unfocusedLabelColor = MaterialTheme.colorScheme.onSurfaceVariant
+            )
         }
     }
 
