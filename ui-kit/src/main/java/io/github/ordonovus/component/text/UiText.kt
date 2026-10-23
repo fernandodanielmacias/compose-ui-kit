@@ -1,5 +1,6 @@
 package io.github.ordonovus.component.text
 
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -13,19 +14,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.TextUnit
-import io.github.ordonovus.theme.UiTypographyBody
-import io.github.ordonovus.theme.UiTypographyBodySecondary
-import io.github.ordonovus.theme.UiTypographyDisplay
-import io.github.ordonovus.theme.UiTypographyHeading
-import io.github.ordonovus.theme.UiTypographyLabel
-import io.github.ordonovus.theme.UiTypographyTitle
 
 /**
  * Semantic typography variants provided by Compose UI Kit.
  *
- * Each variant maps to a typography role defined by the UI Kit design system.
- * Using semantic variants allows typography to be changed centrally without
- * requiring modifications to individual UI components.
+ * Each variant maps to a Material 3 typography role from the active
+ * [MaterialTheme], allowing applications to customize typography
+ * globally without changing individual text components.
  */
 enum class UiTextVariant {
 
@@ -61,28 +56,36 @@ enum class UiTextVariant {
 }
 
 /**
- * Returns the typography style associated with this semantic text variant.
+ * Resolves the typography style associated with this semantic variant.
  *
- * @return The [TextStyle] defined by the Compose UI Kit typography system.
+ * Styles are obtained from the active Material theme, allowing
+ * applications to customize typography globally without changing
+ * individual text components.
+ *
+ * @return The [TextStyle] defined by the active Material theme.
  */
+@Composable
 private fun UiTextVariant.toTextStyle(): TextStyle {
+    val typography = MaterialTheme.typography
+
     return when (this) {
-        UiTextVariant.Display -> UiTypographyDisplay
-        UiTextVariant.Heading -> UiTypographyHeading
-        UiTextVariant.Title -> UiTypographyTitle
-        UiTextVariant.Body -> UiTypographyBody
-        UiTextVariant.BodySecondary -> UiTypographyBodySecondary
-        UiTextVariant.Label -> UiTypographyLabel
+        UiTextVariant.Display -> typography.displayLarge
+        UiTextVariant.Heading -> typography.headlineLarge
+        UiTextVariant.Title -> typography.titleLarge
+        UiTextVariant.Body -> typography.bodyLarge
+        UiTextVariant.BodySecondary -> typography.bodyMedium
+        UiTextVariant.Label -> typography.labelLarge
     }
 }
+
 
 /**
  * Displays text using the semantic typography system provided by Compose UI Kit.
  *
  * [UiText] should be preferred when displaying standard text content so
  * typography remains consistent across an application. The [variant] defines
- * the semantic role of the text while the remaining parameters allow specific
- * properties to be overridden when necessary.
+ * the semantic role of the text and resolves its style from the active
+ * [MaterialTheme.typography]. Other parameters allow individual overrides.
  *
  * By default, the text uses the current content color provided by the active
  * [io.github.ordonovus.theme.UiKitTheme], allowing it to adapt automatically
@@ -105,7 +108,7 @@ private fun UiTextVariant.toTextStyle(): TextStyle {
  * @param maxLines Maximum number of lines allowed.
  * @param minLines Minimum number of lines reserved for the text.
  * @param style Optional complete style override. When provided, it replaces
- * the style associated with [variant].
+ * the typography style resolved from the active theme for [variant].
  *
  * Example:
  * ```
@@ -174,7 +177,8 @@ fun UiText(
  *
  * @param text Annotated text to display.
  * @param modifier Modifier applied to the text.
- * @param variant Semantic typography variant used by default.
+ * @param variant Semantic typography variant resolved from the active
+ * [MaterialTheme.typography].
  * @param color Text color. When unspecified, the current content color is used.
  * @param textAlign Horizontal alignment of the text.
  * @param overflow Behavior when the text exceeds its available space.
@@ -182,7 +186,7 @@ fun UiText(
  * @param maxLines Maximum number of lines allowed.
  * @param minLines Minimum number of lines reserved for the text.
  * @param style Optional complete style override. When provided, it replaces
- * the style associated with [variant].
+ * the typography style resolved from the active theme for [variant].
  *
  * Example:
  * ```

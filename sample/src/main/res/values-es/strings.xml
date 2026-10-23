@@ -266,4 +266,37 @@
     <string name="sample_text_fields_password_show_error">Mostrar error</string>
     <string name="sample_text_fields_password_clear_error">Quitar error</string>
 
+    <!-- Demostraciones de colores del componente de texto -->
+    <string name="sample_text_primary_color">Texto con color primario</string>
+    <string name="sample_text_secondary_color">Texto con color secundario</string>
+
+    <!-- Ejemplo de tipografía -->
+    <string name="sample_typography_title">Tipografía</string>
+    <string name="sample_typography_description">Estilos tipográficos semánticos disponibles en Compose UI Kit.</string>
+    <string name="sample_typography_styles_title">Estilos tipográficos</string>
+    <string name="sample_typography_styles_description">Tokens tipográficos aplicados directamente a componentes de texto de Material 3.</string>
+    <string name="sample_typography_display">Display</string>
+    <string name="sample_typography_heading">Encabezado</string>
+    <string name="sample_typography_variant_title">Título</string>
+    <string name="sample_typography_body">Cuerpo</string>
+    <string name="sample_typography_body_secondary">Cuerpo secundario</string>
+    <string name="sample_typography_label">Etiqueta</string>
+
+    <!-- Demostraciones del encabezado y personalización de tipografía -->
+    <string name="sample_typography_header_demo">Tipografía semántica</string>
+    <string name="sample_typography_custom_title">Personalización de tipografía</string>
+    <string name="sample_typography_custom_description">Compara la tipografía predeterminada con una familia personalizada aplicada mediante UiKitTheme.</string>
+    <string name="sample_typography_default_example">Encabezado predeterminado</string>
+    <string name="sample_typography_custom_example">Encabezado personalizado</string>
+
+    <!-- Demostración del encabezado de tipografía -->
+    <string name="sample_typography_header_supporting">Una jerarquía visual consistente</string>
+
+    <!-- Demostración del encabezado del componente de texto -->
+    <string name="sample_text_header_demo">Texto de Compose UI Kit</string>
+
+    <!-- Demostración del encabezado de texto -->
+    <string name="sample_text_header_status_label">Estado:</string>
+    <string name="sample_text_header_status_value">Aprobado</string>
+
 </resources>

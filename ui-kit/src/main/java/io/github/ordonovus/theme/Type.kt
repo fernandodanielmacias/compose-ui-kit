@@ -3,10 +3,14 @@ package io.github.ordonovus.theme
 import androidx.compose.material3.Typography
 
 /**
- * Typography system used by Compose UI Kit.
+ * Default typography configuration provided by Compose UI Kit.
  *
- * The base scale follows Material 3 typography roles and can be customized
- * centrally without requiring changes to individual components.
+ * The base scale follows Material 3 typography roles. Applications
+ * can provide a custom [Typography] through
+ * [UiKitTheme] to override these defaults globally.
+ *
+ * The semantic typography tokens declared in this file represent
+ * the default styles and do not change when a custom theme is applied.
  */
 val UiTypography = Typography()
 

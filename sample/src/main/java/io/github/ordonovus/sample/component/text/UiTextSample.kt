@@ -17,16 +17,19 @@ import io.github.ordonovus.component.text.UiText
 import io.github.ordonovus.component.text.UiTextVariant
 import io.github.ordonovus.sample.R
 import io.github.ordonovus.sample.ui.layout.SampleComponentHeader
-import io.github.ordonovus.sample.ui.preview.SamplePreview
 import io.github.ordonovus.sample.ui.layout.SampleSection
+import io.github.ordonovus.sample.ui.preview.SamplePreview
 import io.github.ordonovus.theme.UiDimensLarge
 import io.github.ordonovus.theme.UiDimensMedium
 
 /**
  * Displays the semantic text variants provided by Compose UI Kit.
  *
- * Examples are organized by typography, semantic colors, and
- * annotated text support.
+ * Demonstrates UiText with semantic typography variants, Material 3
+ * color overrides, and annotated text styling.
+ *
+ * A practical example is displayed in the component header, while
+ * detailed examples are organized into showcase sections.
  */
 @Composable
 fun UiTextSample() {
@@ -38,14 +41,19 @@ fun UiTextSample() {
         item {
             SampleComponentHeader(
                 title = stringResource(R.string.sample_text_title),
-                description = stringResource(R.string.sample_text_description)
+                description = stringResource(R.string.sample_text_description),
+                demo = {
+                    UiTextHeaderDemo()
+                }
             )
         }
 
         item {
             SampleSection(
                 title = stringResource(R.string.sample_text_typography_title),
-                description = stringResource(R.string.sample_text_typography_description)
+                description = stringResource(
+                    R.string.sample_text_typography_description
+                )
             ) {
                 UiText(
                     text = stringResource(R.string.sample_text_display),
@@ -68,7 +76,9 @@ fun UiTextSample() {
                 )
 
                 UiText(
-                    text = stringResource(R.string.sample_text_body_secondary),
+                    text = stringResource(
+                        R.string.sample_text_body_secondary
+                    ),
                     variant = UiTextVariant.BodySecondary
                 )
 
@@ -82,8 +92,22 @@ fun UiTextSample() {
         item {
             SampleSection(
                 title = stringResource(R.string.sample_text_colors_title),
-                description = stringResource(R.string.sample_text_colors_description)
+                description = stringResource(
+                    R.string.sample_text_colors_description
+                )
             ) {
+                UiText(
+                    text = stringResource(R.string.sample_text_primary_color),
+                    variant = UiTextVariant.Body,
+                    color = MaterialTheme.colorScheme.primary
+                )
+
+                UiText(
+                    text = stringResource(R.string.sample_text_secondary_color),
+                    variant = UiTextVariant.Body,
+                    color = MaterialTheme.colorScheme.secondary
+                )
+
                 UiText(
                     text = stringResource(R.string.sample_text_error),
                     variant = UiTextVariant.BodySecondary,
@@ -93,12 +117,18 @@ fun UiTextSample() {
         }
 
         item {
-            val statusPrefix = stringResource(R.string.sample_text_status_prefix)
-            val approvedText = stringResource(R.string.sample_text_status_approved)
+            val statusPrefix = stringResource(
+                R.string.sample_text_status_prefix
+            )
+            val approvedText = stringResource(
+                R.string.sample_text_status_approved
+            )
 
             SampleSection(
                 title = stringResource(R.string.sample_text_annotated_title),
-                description = stringResource(R.string.sample_text_annotated_description)
+                description = stringResource(
+                    R.string.sample_text_annotated_description
+                )
             ) {
                 UiText(
                     text = buildAnnotatedString {

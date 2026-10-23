@@ -33,6 +33,9 @@ import io.github.ordonovus.theme.UiStrokeThin
  * The header provides a shared layout while allowing each component
  * to supply its own contextual preview.
  *
+ * In compact layouts, the demo appears below the component information.
+ * In expanded layouts, the demo is vertically centered beside it.
+ *
  * @param title Display name of the component.
  * @param description Short description of the component.
  * @param modifier Modifier applied to the header.
@@ -110,7 +113,7 @@ fun SampleComponentHeader(
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.spacedBy(UiDimensLarge),
-                        verticalAlignment = Alignment.Top
+                        verticalAlignment = Alignment.CenterVertically
                     ) {
                         Box(
                             modifier = Modifier.weight(1f)
@@ -125,7 +128,7 @@ fun SampleComponentHeader(
                             modifier = Modifier
                                 .weight(1f)
                                 .padding(UiDimensSmall),
-                            contentAlignment = Alignment.TopCenter
+                            contentAlignment = Alignment.Center
                         ) {
                             demo()
                         }

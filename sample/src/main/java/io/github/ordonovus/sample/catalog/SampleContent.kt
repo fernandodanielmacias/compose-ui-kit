@@ -3,7 +3,7 @@ package io.github.ordonovus.sample.catalog
 import androidx.compose.runtime.Composable
 import io.github.ordonovus.sample.component.button.UiButtonSample
 import io.github.ordonovus.sample.component.text.UiTextSample
-import io.github.ordonovus.sample.component.text.UiTypographySample
+import io.github.ordonovus.sample.component.typography.UiTypographySample
 import io.github.ordonovus.sample.component.textfield.UiTextFieldSample
 
 /**

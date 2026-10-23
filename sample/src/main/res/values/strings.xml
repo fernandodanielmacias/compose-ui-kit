@@ -269,4 +269,37 @@
     <string name="sample_text_fields_password_show_error">Show error</string>
     <string name="sample_text_fields_password_clear_error">Clear error</string>
 
+    <!-- Text component color demonstrations -->
+    <string name="sample_text_primary_color">Primary color text</string>
+    <string name="sample_text_secondary_color">Secondary color text</string>
+
+    <!-- Typography sample -->
+    <string name="sample_typography_title">Typography</string>
+    <string name="sample_typography_description">Semantic typography styles available in Compose UI Kit.</string>
+    <string name="sample_typography_styles_title">Typography styles</string>
+    <string name="sample_typography_styles_description">Typography tokens applied directly to Material 3 text components.</string>
+    <string name="sample_typography_display">Display</string>
+    <string name="sample_typography_heading">Heading</string>
+    <string name="sample_typography_variant_title">Title</string>
+    <string name="sample_typography_body">Body</string>
+    <string name="sample_typography_body_secondary">Secondary body</string>
+    <string name="sample_typography_label">Label</string>
+
+    <!-- Typography header and customization demonstrations -->
+    <string name="sample_typography_header_demo">Semantic typography</string>
+    <string name="sample_typography_custom_title">Typography customization</string>
+    <string name="sample_typography_custom_description">Compare the default typography with a custom font family applied through UiKitTheme.</string>
+    <string name="sample_typography_default_example">Default heading style</string>
+    <string name="sample_typography_custom_example">Customized heading style</string>
+
+    <!-- Typography header demonstration -->
+    <string name="sample_typography_header_supporting">A consistent visual hierarchy</string>
+
+    <!-- Text header demonstration -->
+    <string name="sample_text_header_demo">Compose UI Kit text</string>
+
+    <!-- Text header demonstration -->
+    <string name="sample_text_header_status_label">Status:</string>
+    <string name="sample_text_header_status_value">Approved</string>
+
 </resources>
