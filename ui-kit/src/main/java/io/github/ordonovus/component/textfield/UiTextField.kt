@@ -51,8 +51,9 @@ import androidx.compose.ui.unit.Dp
  * @param placeholder Optional content displayed when the field is empty.
  * @param supportingText Optional supporting content displayed below the field.
  * It is replaced by [errorText] while a non-empty error message is active.
- * @param leadingIcon Optional icon or content displayed at the beginning of
- * the field.
+ * @param leadingIcon Optional custom leading content. Custom icons can use
+ * [UiTextFieldIconDefaults.iconColor] to adapt their tint to the enabled
+ * and error states of the field.
  * @param trailingIcon Optional icon or content displayed at the end of the
  * field.
  * @param showClearButton Whether to display the default clear action when
@@ -233,8 +234,9 @@ fun UiTextField(
  * @param placeholder Optional content displayed when the field is empty.
  * @param supportingText Optional supporting content displayed below the field.
  * It is replaced by [errorText] while a non-empty error message is active.
- * @param leadingIcon Optional icon or content displayed at the beginning of
- * the field.
+ * @param leadingIcon Optional custom leading content. Custom icons can use
+ * [UiTextFieldIconDefaults.iconColor] to adapt their tint to the enabled
+ * and error states of the field.
  * @param trailingIcon Optional icon or content displayed at the end of the
  * field.
  * @param showClearButton Whether to display the default clear action when

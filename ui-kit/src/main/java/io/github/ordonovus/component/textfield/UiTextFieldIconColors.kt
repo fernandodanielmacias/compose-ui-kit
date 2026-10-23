@@ -52,6 +52,34 @@ object UiTextFieldIconDefaults {
     val current: UiTextFieldIconColors
         @Composable
         get() = LocalUiTextFieldIconColors.current ?: colors()
+
+    /**
+     * Resolves the color of a text field icon according to its state.
+     *
+     * Disabled state takes precedence over error state. When the field is
+     * enabled and has no error, the configured action color is returned.
+     *
+     * This function can be used by custom leading and trailing icons
+     * to follow the same color behavior as built-in text field icons.
+     *
+     * @param enabled Whether the associated text field is enabled.
+     * @param isError Whether the associated text field is in an error state.
+     * @param colors Color palette used to resolve the icon color.
+     * @return The color corresponding to the current field state.
+     */
+    @Composable
+    fun iconColor(
+        enabled: Boolean = true,
+        isError: Boolean = false,
+        colors: UiTextFieldIconColors = current
+    ): Color {
+        return when {
+            !enabled -> colors.disabled
+            isError -> colors.error
+            else -> colors.action
+        }
+    }
+
 }
 
 private val LocalUiTextFieldIconColors =

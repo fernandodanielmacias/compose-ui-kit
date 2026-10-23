@@ -92,10 +92,7 @@
 
     <!-- Validation -->
     <string name="sample_text_fields_validation_title">Validation</string>
-    <string name="sample_text_fields_validation_description">Error feedback for invalid input.</string>
-    <string name="sample_text_fields_error_label">Error field</string>
-    <string name="sample_text_fields_error_message">The entered value is invalid</string>
-    <string name="sample_text_fields_invalid_value">Invalid value</string>
+    <string name="sample_text_fields_validation_description">Interactive validation with required, invalid, and valid input states.</string>
 
     <!-- States -->
     <string name="sample_text_fields_states_title">States</string>
@@ -105,9 +102,9 @@
     <string name="sample_text_fields_read_only_label">Read-only field</string>
     <string name="sample_text_fields_read_only_value">Read-only value</string>
 
-    <!-- Password -->
+    <!-- Password text field section -->
     <string name="sample_text_fields_password_title">Password</string>
-    <string name="sample_text_fields_password_description">Secure input with a password visibility toggle.</string>
+    <string name="sample_text_fields_password_description">Password validation, visibility controls, and leading icon customization.</string>
     <string name="sample_text_fields_password_label">Password</string>
 
     <!-- ========================================================= -->
@@ -247,5 +244,29 @@
     <string name="sample_text_fields_search_feedback">Search action triggered</string>
     <string name="sample_text_fields_verified_label">Custom trailing icon</string>
     <string name="sample_text_fields_verified_placeholder">Enter a value</string>
+
+    <!-- Text field validation demo -->
+    <string name="sample_text_fields_access_code_label">Access code</string>
+    <string name="sample_text_fields_access_code_placeholder">Enter 6 digits</string>
+    <string name="sample_text_fields_access_code_supporting">Enter a six-digit numeric code.</string>
+    <string name="sample_text_fields_required_error">This field is required.</string>
+    <string name="sample_text_fields_invalid_code_error">The code must contain exactly 6 digits.</string>
+    <string name="sample_text_fields_validate_action">Validate</string>
+    <string name="sample_text_fields_validation_success">Valid code.</string>
+
+    <!-- Password text field demonstrations -->
+    <string name="sample_text_fields_password_validation_label">Password validation</string>
+    <string name="sample_text_fields_password_validation_supporting">Enter at least 8 characters.</string>
+    <string name="sample_text_fields_password_required_error">Password is required.</string>
+    <string name="sample_text_fields_password_length_error">Password must contain at least 8 characters.</string>
+    <string name="sample_text_fields_password_validation_success">Valid password.</string>
+    <string name="sample_text_fields_password_validate_action">Validate password</string>
+    <string name="sample_text_fields_password_custom_icon_label">Custom leading icon</string>
+    <string name="sample_text_fields_password_no_icon_label">Without leading icon</string>
+
+    <!-- Password icon error state demonstration -->
+    <string name="sample_text_fields_password_custom_icon_error">Custom icon error state.</string>
+    <string name="sample_text_fields_password_show_error">Show error</string>
+    <string name="sample_text_fields_password_clear_error">Clear error</string>
 
 </resources>

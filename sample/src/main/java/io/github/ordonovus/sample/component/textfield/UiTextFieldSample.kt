@@ -17,14 +17,18 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
+import io.github.ordonovus.component.button.UiButton
 import io.github.ordonovus.component.text.UiText
-import io.github.ordonovus.component.textfield.UiOutlinedPasswordTextField
 import io.github.ordonovus.component.textfield.UiOutlinedTextField
 import io.github.ordonovus.component.textfield.UiTextField
 import io.github.ordonovus.component.textfield.UiTextFieldDefaults
@@ -47,8 +51,13 @@ import io.github.ordonovus.theme.UiStrokeThick
 /**
  * Displays the text field variants and states provided by Compose UI Kit.
  *
- * Demonstrates filled, outlined, multiline, error, disabled,
- * read-only, and secure password text fields.
+ * Demonstrates filled, outlined, multiline, interactive validation,
+ * disabled, read-only, and secure password text fields.
+ *
+ * Also showcases built-in icons, supporting content, input and output
+ * transformations, character limits, and visual customization.
+ *
+ * Password-specific examples are delegated to [UiTextFieldPasswordDemo].
  */
 @Composable
 fun UiTextFieldSample() {
@@ -70,11 +79,18 @@ fun UiTextFieldSample() {
 
     val searchMessage = stringResource(R.string.sample_text_fields_search_feedback)
 
-    val errorState = rememberLocalizedTextFieldState(
-        localizedValue = stringResource(
-            R.string.sample_text_fields_invalid_value
-        )
-    )
+    val validationState = rememberTextFieldState()
+    var validationRequested by remember { mutableStateOf(false) }
+    val validationValue = validationState.text.toString()
+
+    val validationError = when {
+        !validationRequested -> null
+        validationValue.isEmpty() ->
+            R.string.sample_text_fields_required_error
+        validationValue.length != 6 ->
+            R.string.sample_text_fields_invalid_code_error
+        else -> null
+    }
 
     val disabledState = rememberLocalizedTextFieldState(
         localizedValue = stringResource(
@@ -87,8 +103,6 @@ fun UiTextFieldSample() {
             R.string.sample_text_fields_read_only_value
         )
     )
-
-    val passwordState = rememberTextFieldState()
 
     LazyColumn(
         modifier = Modifier
@@ -394,14 +408,54 @@ fun UiTextFieldSample() {
                 description = stringResource(R.string.sample_text_fields_validation_description)
             ) {
                 UiOutlinedTextField(
-                    state = errorState,
+                    state = validationState,
                     modifier = Modifier.fillMaxWidth(),
                     label = {
-                        UiText(stringResource(R.string.sample_text_fields_error_label))
+                        UiText(
+                            stringResource(R.string.sample_text_fields_access_code_label)
+                        )
                     },
-                    isError = true,
-                    errorText = stringResource(R.string.sample_text_fields_error_message)
+                    placeholder = {
+                        UiText(
+                            stringResource(R.string.sample_text_fields_access_code_placeholder)
+                        )
+                    },
+                    supportingText = {
+                        if (validationRequested && validationError == null) {
+                            UiText(
+                                text = stringResource(
+                                    R.string.sample_text_fields_validation_success
+                                ),
+                                color = MaterialTheme.colorScheme.primary
+                            )
+                        } else {
+                            UiText(
+                                text = stringResource(
+                                    R.string.sample_text_fields_access_code_supporting
+                                )
+                            )
+                        }
+                    },
+                    keyboardOptions = UiTextFieldDefaults.keyboardOptions(
+                        keyboardType = KeyboardType.Number
+                    ),
+                    inputTransformation = UiTextFieldTransformations.digitsOnly(),
+                    maxLength = 6,
+                    isError = validationError != null,
+                    errorText = validationError?.let { stringResource(it) },
+                    showClearButton = true
                 )
+
+                UiButton(
+                    onClick = {
+                        validationRequested = true
+                    },
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    UiText(
+                        stringResource(R.string.sample_text_fields_validate_action)
+                    )
+                }
             }
         }
 
@@ -435,14 +489,7 @@ fun UiTextFieldSample() {
                 title = stringResource(R.string.sample_text_fields_password_title),
                 description = stringResource(R.string.sample_text_fields_password_description)
             ) {
-                UiOutlinedPasswordTextField(
-                    state = passwordState,
-                    modifier = Modifier.fillMaxWidth(),
-                    label = {
-                        UiText(stringResource(R.string.sample_text_fields_password_label))
-                    },
-                    maxLength = 20
-                )
+                UiTextFieldPasswordDemo()
             }
         }
 

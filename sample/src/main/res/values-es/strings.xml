@@ -89,10 +89,7 @@
 
     <!-- Validation -->
     <string name="sample_text_fields_validation_title">Validación</string>
-    <string name="sample_text_fields_validation_description">Mensajes de error para entradas no válidas.</string>
-    <string name="sample_text_fields_error_label">Campo con error</string>
-    <string name="sample_text_fields_error_message">El valor ingresado no es válido</string>
-    <string name="sample_text_fields_invalid_value">Valor no válido</string>
+    <string name="sample_text_fields_validation_description">Validación interactiva de campos obligatorios, valores inválidos y valores correctos.</string>
 
     <!-- States -->
     <string name="sample_text_fields_states_title">Estados</string>
@@ -102,9 +99,9 @@
     <string name="sample_text_fields_read_only_label">Campo de solo lectura</string>
     <string name="sample_text_fields_read_only_value">Valor de solo lectura</string>
 
-    <!-- Password -->
+    <!-- Sección de campos de contraseña -->
     <string name="sample_text_fields_password_title">Contraseña</string>
-    <string name="sample_text_fields_password_description">Entrada segura con opción para mostrar u ocultar la contraseña.</string>
+    <string name="sample_text_fields_password_description">Validación de contraseñas, controles de visibilidad y personalización del icono inicial.</string>
     <string name="sample_text_fields_password_label">Contraseña</string>
 
     <!-- ========================================================= -->
@@ -244,5 +241,29 @@
     <string name="sample_text_fields_search_feedback">Acción de búsqueda ejecutada</string>
     <string name="sample_text_fields_verified_label">Icono personalizado</string>
     <string name="sample_text_fields_verified_placeholder">Escribe un valor</string>
+
+    <!-- Demostración de validación de campos de texto -->
+    <string name="sample_text_fields_access_code_label">Código de acceso</string>
+    <string name="sample_text_fields_access_code_placeholder">Introduce 6 dígitos</string>
+    <string name="sample_text_fields_access_code_supporting">Introduce un código numérico de seis dígitos.</string>
+    <string name="sample_text_fields_required_error">Este campo es obligatorio.</string>
+    <string name="sample_text_fields_invalid_code_error">El código debe contener exactamente 6 dígitos.</string>
+    <string name="sample_text_fields_validate_action">Validar</string>
+    <string name="sample_text_fields_validation_success">Código válido.</string>
+
+    <!-- Demostraciones de campos de contraseña -->
+    <string name="sample_text_fields_password_validation_label">Validación de contraseña</string>
+    <string name="sample_text_fields_password_validation_supporting">Introduce al menos 8 caracteres.</string>
+    <string name="sample_text_fields_password_required_error">La contraseña es obligatoria.</string>
+    <string name="sample_text_fields_password_length_error">La contraseña debe contener al menos 8 caracteres.</string>
+    <string name="sample_text_fields_password_validation_success">Contraseña válida.</string>
+    <string name="sample_text_fields_password_validate_action">Validar contraseña</string>
+    <string name="sample_text_fields_password_custom_icon_label">Icono inicial personalizado</string>
+    <string name="sample_text_fields_password_no_icon_label">Sin icono inicial</string>
+
+    <!-- Demostración del estado de error en iconos de contraseña -->
+    <string name="sample_text_fields_password_custom_icon_error">Estado de error con icono personalizado.</string>
+    <string name="sample_text_fields_password_show_error">Mostrar error</string>
+    <string name="sample_text_fields_password_clear_error">Quitar error</string>
 
 </resources>

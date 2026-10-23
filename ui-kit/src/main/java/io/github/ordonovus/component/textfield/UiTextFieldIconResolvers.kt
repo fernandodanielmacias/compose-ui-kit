@@ -10,10 +10,13 @@ import androidx.compose.runtime.Composable
  * When no custom content is provided, the default icon is displayed
  * only if [showDefaultLeadingIcon] is enabled.
  *
+ * The built-in icon reflects the enabled and error states of the field.
+ *
  * @param leadingIcon Optional custom leading content.
  * @param showDefaultLeadingIcon Whether to display the default lock icon
  * when custom leading content is not provided.
  * @param enabled Whether the associated text field is enabled.
+ * @param isError Whether the associated text field is in an error state.
  * @param iconColors Colors used by the built-in lock icon.
  * @return The resolved leading composable, or `null` when hidden.
  */
@@ -21,6 +24,7 @@ internal fun resolvePasswordLeadingIcon(
     leadingIcon: (@Composable () -> Unit)?,
     showDefaultLeadingIcon: Boolean,
     enabled: Boolean,
+    isError: Boolean,
     iconColors: UiTextFieldIconColors
 ): (@Composable () -> Unit)? {
     if (leadingIcon != null) {
@@ -31,6 +35,7 @@ internal fun resolvePasswordLeadingIcon(
         val lockIcon: @Composable () -> Unit = {
             UiPasswordLeadingIcon(
                 enabled = enabled,
+                isError = isError,
                 iconColors = iconColors
             )
         }

@@ -77,8 +77,9 @@ private fun UiPasswordVisibilityButton(
  * @param label Optional label displayed by the text field.
  * @param placeholder Optional placeholder displayed when the field is empty.
  * @param leadingIcon Optional custom leading content. When provided, it takes
- * precedence over the default lock icon. When `null`, the default lock icon
- * is displayed if [showDefaultLeadingIcon] is `true`.
+ * precedence over the built-in lock icon. Custom icons can use
+ * [UiTextFieldIconDefaults.iconColor] to adapt their tint to the enabled
+ * and error states of the field.
  * @param showDefaultLeadingIcon Whether to display the built-in lock icon
  * when no custom [leadingIcon] is provided. Set to `false` to hide it.
  * @param supportingText Optional supporting content displayed below the field
@@ -160,6 +161,7 @@ fun UiOutlinedPasswordTextField(
         leadingIcon = leadingIcon,
         showDefaultLeadingIcon = showDefaultLeadingIcon,
         enabled = enabled,
+        isError = isError,
         iconColors = iconColors
     )
 

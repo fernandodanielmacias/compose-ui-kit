@@ -25,27 +25,33 @@ internal fun UiTextFieldErrorIcon(
     )
 }
 
+
 /**
  * Displays the default leading lock icon for secure text fields.
  *
- * The icon uses the configured action color when enabled and the
- * disabled color otherwise.
+ * The icon uses the configured action color when enabled, the error
+ * color when validation fails, and the disabled color when the field
+ * is not enabled.
  *
  * @param enabled Whether the associated text field is enabled.
+ * @param isError Whether the associated text field is in an error state.
  * @param iconColors Colors applied to the icon.
  */
 @Composable
 internal fun UiPasswordLeadingIcon(
     enabled: Boolean = true,
+    isError: Boolean = false,
     iconColors: UiTextFieldIconColors = UiTextFieldIconDefaults.current
 ) {
+    val iconColor = UiTextFieldIconDefaults.iconColor(
+        enabled = enabled,
+        isError = isError,
+        colors = iconColors
+    )
+
     Icon(
         painter = painterResource(R.drawable.ic_lock),
         contentDescription = null,
-        tint = if (enabled) {
-            iconColors.action
-        } else {
-            iconColors.disabled
-        }
+        tint = iconColor
     )
 }
