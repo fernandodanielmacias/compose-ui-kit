@@ -110,6 +110,7 @@
 
     <!-- Navigation items -->
     <string name="sample_navigation_button">Botones</string>
+    <string name="sample_navigation_fab">Botones de acción flotantes</string>
     <string name="sample_navigation_typography">Tipografía</string>
     <string name="sample_navigation_text">Texto</string>
     <string name="sample_navigation_text_field">Campos de texto</string>
@@ -298,5 +299,48 @@
     <!-- Demostración del encabezado de texto -->
     <string name="sample_text_header_status_label">Estado:</string>
     <string name="sample_text_header_status_value">Aprobado</string>
+
+    <!-- Catálogo de botones de acción flotantes -->
+    <string name="sample_fab_title">Botones de acción flotantes</string>
+    <string name="sample_fab_description">Explora los botones de acción flotantes de Material 3, los colores semánticos, el comportamiento expandible y la personalización.</string>
+
+    <!-- Variantes de FAB -->
+    <string name="sample_fab_variants_title">Variantes de FAB</string>
+    <string name="sample_fab_variants_description">Compara los botones de acción flotantes pequeño, estándar, grande y extendido.</string>
+    <string name="sample_fab_small">Botón de acción flotante pequeño</string>
+    <string name="sample_fab_standard">Botón de acción flotante estándar</string>
+    <string name="sample_fab_large">Botón de acción flotante grande</string>
+    <string name="sample_fab_add">Agregar</string>
+
+    <!-- Colores de FAB -->
+    <string name="sample_fab_colors_title">Colores semánticos</string>
+    <string name="sample_fab_colors_description">Los botones de acción flotantes se adaptan al esquema de colores activo de Material 3.</string>
+    <string name="sample_fab_primary">Botón de acción flotante primario</string>
+    <string name="sample_fab_secondary">Botón de acción flotante secundario</string>
+    <string name="sample_fab_tertiary">Botón de acción flotante terciario</string>
+
+    <!-- FAB extendido -->
+    <string name="sample_fab_expanded_title">FAB expandible</string>
+    <string name="sample_fab_expanded_description">Presiona el botón para expandir o contraer su etiqueta de texto.</string>
+    <string name="sample_fab_edit">Editar</string>
+    <string name="sample_fab_toggle">Alternar botón de acción flotante extendido</string>
+    <string name="sample_fab_expanded_state">Estado actual: Expandido</string>
+    <string name="sample_fab_collapsed_state">Estado actual: Contraído</string>
+
+    <!-- Personalización de FAB -->
+    <string name="sample_fab_customization_title">Personalización</string>
+    <string name="sample_fab_customization_description">Personaliza las formas, la elevación y los colores del contenedor.</string>
+    <string name="sample_fab_cut_shape">Botón de acción flotante con esquinas recortadas</string>
+    <string name="sample_fab_square_shape">Botón de acción flotante cuadrado</string>
+    <string name="sample_fab_lowered_elevation">Botón de acción flotante con elevación reducida</string>
+
+    <!-- Demostración del encabezado de FAB -->
+    <string name="sample_fab_header_counter">Acciones: %1$d</string>
+
+    <!-- Mensajes de FAB -->
+    <string name="sample_fab_action_message">Botón de acción flotante presionado</string>
+    <string name="sample_fab_primary_message">FAB primario presionado</string>
+    <string name="sample_fab_secondary_message">FAB secundario presionado</string>
+    <string name="sample_fab_tertiary_message">FAB terciario presionado</string>
 
 </resources>

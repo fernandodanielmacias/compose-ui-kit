@@ -2,9 +2,10 @@ package io.github.ordonovus.sample.catalog
 
 import androidx.compose.runtime.Composable
 import io.github.ordonovus.sample.component.button.UiButtonSample
+import io.github.ordonovus.sample.component.fab.UiFabSample
 import io.github.ordonovus.sample.component.text.UiTextSample
-import io.github.ordonovus.sample.component.typography.UiTypographySample
 import io.github.ordonovus.sample.component.textfield.UiTextFieldSample
+import io.github.ordonovus.sample.component.typography.UiTypographySample
 
 /**
  * Displays the sample associated with the specified component.
@@ -20,6 +21,7 @@ fun SampleContent(
 ) {
     when (component) {
         SampleComponent.Button -> UiButtonSample()
+        SampleComponent.Fab -> UiFabSample()
         SampleComponent.Typography -> UiTypographySample()
         SampleComponent.Text -> UiTextSample()
         SampleComponent.TextField -> UiTextFieldSample()

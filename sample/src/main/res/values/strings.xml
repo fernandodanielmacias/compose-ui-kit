@@ -113,6 +113,7 @@
 
     <!-- Navigation items -->
     <string name="sample_navigation_button">Buttons</string>
+    <string name="sample_navigation_fab">Floating Action Buttons</string>
     <string name="sample_navigation_typography">Typography</string>
     <string name="sample_navigation_text">Text</string>
     <string name="sample_navigation_text_field">Text fields</string>
@@ -301,5 +302,48 @@
     <!-- Text header demonstration -->
     <string name="sample_text_header_status_label">Status:</string>
     <string name="sample_text_header_status_value">Approved</string>
+
+    <!-- Floating action button showcase -->
+    <string name="sample_fab_title">Floating Action Buttons</string>
+    <string name="sample_fab_description">Explore Material 3 floating action buttons, semantic colors, expandable behavior, and customization.</string>
+
+    <!-- FAB variants -->
+    <string name="sample_fab_variants_title">FAB variants</string>
+    <string name="sample_fab_variants_description">Compare small, standard, large, and extended floating action buttons.</string>
+    <string name="sample_fab_small">Small floating action button</string>
+    <string name="sample_fab_standard">Standard floating action button</string>
+    <string name="sample_fab_large">Large floating action button</string>
+    <string name="sample_fab_add">Add</string>
+
+    <!-- FAB colors -->
+    <string name="sample_fab_colors_title">Semantic colors</string>
+    <string name="sample_fab_colors_description">Floating action buttons adapt to the active Material 3 color scheme.</string>
+    <string name="sample_fab_primary">Primary floating action button</string>
+    <string name="sample_fab_secondary">Secondary floating action button</string>
+    <string name="sample_fab_tertiary">Tertiary floating action button</string>
+
+    <!-- Extended FAB -->
+    <string name="sample_fab_expanded_title">Expandable FAB</string>
+    <string name="sample_fab_expanded_description">Tap the button to expand or collapse its text label.</string>
+    <string name="sample_fab_edit">Edit</string>
+    <string name="sample_fab_toggle">Toggle extended floating action button</string>
+    <string name="sample_fab_expanded_state">Current state: Expanded</string>
+    <string name="sample_fab_collapsed_state">Current state: Collapsed</string>
+
+    <!-- FAB customization -->
+    <string name="sample_fab_customization_title">Customization</string>
+    <string name="sample_fab_customization_description">Customize shapes, elevation, and container colors.</string>
+    <string name="sample_fab_cut_shape">Cut corner floating action button</string>
+    <string name="sample_fab_square_shape">Square floating action button</string>
+    <string name="sample_fab_lowered_elevation">Floating action button with reduced elevation</string>
+
+    <!-- FAB header demonstration -->
+    <string name="sample_fab_header_counter">Actions: %1$d</string>
+
+    <!-- FAB feedback -->
+    <string name="sample_fab_action_message">Floating action button clicked</string>
+    <string name="sample_fab_primary_message">Primary FAB clicked</string>
+    <string name="sample_fab_secondary_message">Secondary FAB clicked</string>
+    <string name="sample_fab_tertiary_message">Tertiary FAB clicked</string>
 
 </resources>

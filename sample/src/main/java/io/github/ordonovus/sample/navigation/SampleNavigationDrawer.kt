@@ -15,6 +15,7 @@ import androidx.compose.material3.NavigationDrawerItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import io.github.ordonovus.sample.R
 import io.github.ordonovus.sample.catalog.SampleComponent
@@ -75,10 +76,21 @@ internal fun SampleNavigationDrawer(
                     onSampleSelected(component)
                 },
                 icon = {
-                    Icon(
-                        imageVector = component.icon,
-                        contentDescription = null
-                    )
+                    when {
+                        component.iconRes != null -> {
+                            Icon(
+                                painter = painterResource(id = component.iconRes),
+                                contentDescription = null
+                            )
+                        }
+
+                        component.icon != null -> {
+                            Icon(
+                                imageVector = component.icon,
+                                contentDescription = null
+                            )
+                        }
+                    }
                 },
                 badge = {
                     if (isSelected) {

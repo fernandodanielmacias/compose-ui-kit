@@ -40,6 +40,7 @@ import io.github.ordonovus.sample.ui.feedback.showSampleMessage
 import io.github.ordonovus.sample.ui.layout.SampleComponentHeader
 import io.github.ordonovus.sample.ui.preview.SamplePreview
 import io.github.ordonovus.sample.ui.layout.SampleSection
+import io.github.ordonovus.sample.ui.preview.SamplePreviewDevice
 import io.github.ordonovus.sample.ui.theme.SampleCustomizationAccentColor
 import io.github.ordonovus.theme.UiDimensLarge
 import io.github.ordonovus.theme.UiDimensMedium
@@ -502,8 +503,8 @@ fun UiTextFieldSample() {
 @Preview(
     name = "Text Fields - Light",
     showBackground = true,
-    widthDp = 360,
-    heightDp = 700
+    showSystemUi = true,
+    device = SamplePreviewDevice
 )
 @Composable
 private fun UiTextFieldSampleLightPreview() {
@@ -518,8 +519,8 @@ private fun UiTextFieldSampleLightPreview() {
 @Preview(
     name = "Text Fields - Dark",
     showBackground = true,
-    widthDp = 360,
-    heightDp = 700
+    showSystemUi = true,
+    device = SamplePreviewDevice
 )
 @Composable
 private fun UiTextFieldSampleDarkPreview() {

@@ -19,6 +19,7 @@ import io.github.ordonovus.sample.R
 import io.github.ordonovus.sample.ui.layout.SampleComponentHeader
 import io.github.ordonovus.sample.ui.layout.SampleSection
 import io.github.ordonovus.sample.ui.preview.SamplePreview
+import io.github.ordonovus.sample.ui.preview.SamplePreviewDevice
 import io.github.ordonovus.theme.UiDimensLarge
 import io.github.ordonovus.theme.UiDimensMedium
 
@@ -155,8 +156,8 @@ fun UiTextSample() {
 @Preview(
     name = "Text - Light",
     showBackground = true,
-    widthDp = 360,
-    heightDp = 700
+    showSystemUi = true,
+    device = SamplePreviewDevice
 )
 @Composable
 private fun UiTextSampleLightPreview() {
@@ -171,8 +172,8 @@ private fun UiTextSampleLightPreview() {
 @Preview(
     name = "Text - Dark",
     showBackground = true,
-    widthDp = 360,
-    heightDp = 700
+    showSystemUi = true,
+    device = SamplePreviewDevice
 )
 @Composable
 private fun UiTextSampleDarkPreview() {

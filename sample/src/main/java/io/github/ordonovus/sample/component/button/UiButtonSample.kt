@@ -33,6 +33,7 @@ import io.github.ordonovus.sample.ui.layout.SampleComponentHeader
 import io.github.ordonovus.sample.ui.preview.SamplePreview
 import io.github.ordonovus.sample.ui.layout.SampleSection
 import io.github.ordonovus.sample.ui.feedback.showSampleMessage
+import io.github.ordonovus.sample.ui.preview.SamplePreviewDevice
 import io.github.ordonovus.theme.UiDimensLarge
 import io.github.ordonovus.theme.UiDimensMedium
 import io.github.ordonovus.theme.UiDimensSmall
@@ -377,8 +378,8 @@ fun UiButtonSample() {
 @Preview(
     name = "Buttons - Light",
     showBackground = true,
-    widthDp = 360,
-    heightDp = 700
+    showSystemUi = true,
+    device = SamplePreviewDevice
 )
 @Composable
 private fun UiButtonSampleLightPreview() {
@@ -393,8 +394,8 @@ private fun UiButtonSampleLightPreview() {
 @Preview(
     name = "Buttons - Dark",
     showBackground = true,
-    widthDp = 360,
-    heightDp = 700
+    showSystemUi = true,
+    device = SamplePreviewDevice
 )
 @Composable
 private fun UiButtonSampleDarkPreview() {
