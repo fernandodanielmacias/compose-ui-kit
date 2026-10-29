@@ -4,11 +4,26 @@ Project: Lucide Icons
 Website: https://lucide.dev
 Source: https://github.com/lucide-icons/lucide
 
-Asset: text-cursor-input
-Included file: ui-kit/src/main/res/drawable/ic_text_cursor_input.xml
+Included assets:
 
-The original SVG icon was converted into an Android VectorDrawable
-for use in Compose UI Kit.
+1. text-cursor-input
+   Source: https://lucide.dev/icons/text-cursor-input
+   File: ui-kit/src/main/res/drawable/ic_text_cursor_input.xml
+
+2. arrow-up
+   Source: https://lucide.dev/icons/arrow-up
+   File: ui-kit/src/main/res/drawable/ic_arrow_up.xml
+
+3. arrow-down
+   Source: https://lucide.dev/icons/arrow-down
+   File: ui-kit/src/main/res/drawable/ic_arrow_down.xml
+
+4. arrow-down-up
+   Source: https://lucide.dev/icons/arrow-down-up
+   File: ui-kit/src/main/res/drawable/ic_arrow_down_up.xml
+
+The SVG assets have been converted into Android VectorDrawable
+resources for use in Compose UI Kit.
 
 The original Lucide license follows below.
 

@@ -8,11 +8,15 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.SegmentedButton
+import androidx.compose.material3.SegmentedButtonDefaults
+import androidx.compose.material3.SingleChoiceSegmentedButtonRow
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -33,6 +37,8 @@ import io.github.ordonovus.sample.R
 import io.github.ordonovus.sample.ui.feedback.LocalSampleSnackbarHostState
 import io.github.ordonovus.sample.ui.feedback.showSampleMessage
 import io.github.ordonovus.sample.ui.layout.SampleComponentHeader
+import io.github.ordonovus.sample.ui.layout.SampleScrollFabMode
+import io.github.ordonovus.sample.ui.layout.SampleScrollToTopContainer
 import io.github.ordonovus.sample.ui.layout.SampleSection
 import io.github.ordonovus.sample.ui.preview.SamplePreview
 import io.github.ordonovus.sample.ui.preview.SamplePreviewDevice
@@ -54,8 +60,11 @@ fun UiFabSample() {
     val snackbarHostState = LocalSampleSnackbarHostState.current
     val coroutineScope = rememberCoroutineScope()
 
-    var expanded by rememberSaveable {
-        mutableStateOf(true)
+    val listState = rememberLazyListState()
+
+    var expanded by rememberSaveable { mutableStateOf(true) }
+    var scrollFabMode by rememberSaveable {
+        mutableStateOf(SampleScrollFabMode.ScrollToTop)
     }
 
     val actionMessage = stringResource(R.string.sample_fab_action_message)
@@ -63,289 +72,347 @@ fun UiFabSample() {
     val secondaryMessage = stringResource(R.string.sample_fab_secondary_message)
     val tertiaryMessage = stringResource(R.string.sample_fab_tertiary_message)
 
-    LazyColumn(
-        modifier = Modifier.fillMaxSize(),
-        contentPadding = PaddingValues(UiDimensMedium),
-        verticalArrangement = Arrangement.spacedBy(UiDimensLarge)
+    SampleScrollToTopContainer(
+        listState = listState,
+        mode = scrollFabMode
     ) {
-        item {
-            SampleComponentHeader(
-                title = stringResource(R.string.sample_fab_title),
-                description = stringResource(R.string.sample_fab_description),
-                demo = {
-                    UiFabHeaderDemo()
-                }
-            )
-        }
+        LazyColumn(
+            state = listState,
+            modifier = Modifier.fillMaxSize(),
+            contentPadding = PaddingValues(UiDimensMedium),
+            verticalArrangement = Arrangement.spacedBy(UiDimensLarge)
+        ) {
+            item {
+                SampleComponentHeader(
+                    title = stringResource(R.string.sample_fab_title),
+                    description = stringResource(R.string.sample_fab_description),
+                    demo = {
+                        UiFabHeaderDemo()
+                    }
+                )
+            }
 
-        item {
-            SampleSection(
-                title = stringResource(R.string.sample_fab_variants_title),
-                description = stringResource(R.string.sample_fab_variants_description)
-            ) {
-                FlowRow(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(UiDimensMedium),
-                    verticalArrangement = Arrangement.spacedBy(UiDimensMedium),
-                    itemVerticalAlignment = Alignment.CenterVertically
+            item {
+                SampleSection(
+                    title = stringResource(R.string.sample_fab_variants_title),
+                    description = stringResource(R.string.sample_fab_variants_description)
                 ) {
-                    UiSmallFloatingActionButton(
-                        onClick = {
-                            snackbarHostState.showSampleMessage(
-                                coroutineScope,
-                                actionMessage
-                            )
-                        }
+                    FlowRow(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(UiDimensMedium),
+                        verticalArrangement = Arrangement.spacedBy(UiDimensMedium),
+                        itemVerticalAlignment = Alignment.CenterVertically
                     ) {
-                        Icon(
-                            imageVector = Icons.Default.Add,
-                            contentDescription = stringResource(
-                                R.string.sample_fab_small
-                            )
-                        )
-                    }
-
-                    UiFloatingActionButton(
-                        onClick = {
-                            snackbarHostState.showSampleMessage(
-                                coroutineScope,
-                                actionMessage
-                            )
-                        }
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.Add,
-                            contentDescription = stringResource(
-                                R.string.sample_fab_standard
-                            )
-                        )
-                    }
-
-                    UiLargeFloatingActionButton(
-                        onClick = {
-                            snackbarHostState.showSampleMessage(
-                                coroutineScope,
-                                actionMessage
-                            )
-                        }
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.Add,
-                            contentDescription = stringResource(
-                                R.string.sample_fab_large
-                            ),
-                            modifier = Modifier.size(
-                                UiFloatingActionButtonDefaults.LargeIconSize
-                            )
-                        )
-                    }
-
-                    UiExtendedFloatingActionButton(
-                        onClick = {
-                            snackbarHostState.showSampleMessage(
-                                coroutineScope,
-                                actionMessage
-                            )
-                        },
-                        text = {
-                            UiText(
-                                text = stringResource(R.string.sample_fab_add)
-                            )
-                        },
-                        icon = {
+                        UiSmallFloatingActionButton(
+                            onClick = {
+                                snackbarHostState.showSampleMessage(
+                                    coroutineScope,
+                                    actionMessage
+                                )
+                            }
+                        ) {
                             Icon(
                                 imageVector = Icons.Default.Add,
-                                contentDescription = null
-                            )
-                        }
-                    )
-                }
-            }
-        }
-
-        item {
-            SampleSection(
-                title = stringResource(R.string.sample_fab_colors_title),
-                description = stringResource(R.string.sample_fab_colors_description)
-            ) {
-                FlowRow(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(UiDimensMedium),
-                    verticalArrangement = Arrangement.spacedBy(UiDimensMedium)
-                ) {
-                    UiFloatingActionButton(
-                        onClick = {
-                            snackbarHostState.showSampleMessage(
-                                coroutineScope,
-                                primaryMessage
-                            )
-                        },
-                        containerColor =
-                            UiFloatingActionButtonDefaults.PrimaryContainerColor,
-                        contentColor =
-                            UiFloatingActionButtonDefaults.PrimaryContentColor
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.Add,
-                            contentDescription = stringResource(
-                                R.string.sample_fab_primary
-                            )
-                        )
-                    }
-
-                    UiFloatingActionButton(
-                        onClick = {
-                            snackbarHostState.showSampleMessage(
-                                coroutineScope,
-                                secondaryMessage
-                            )
-                        },
-                        containerColor =
-                            UiFloatingActionButtonDefaults.SecondaryContainerColor,
-                        contentColor =
-                            UiFloatingActionButtonDefaults.SecondaryContentColor
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.Add,
-                            contentDescription = stringResource(
-                                R.string.sample_fab_secondary
-                            )
-                        )
-                    }
-
-                    UiFloatingActionButton(
-                        onClick = {
-                            snackbarHostState.showSampleMessage(
-                                coroutineScope,
-                                tertiaryMessage
-                            )
-                        },
-                        containerColor =
-                            UiFloatingActionButtonDefaults.TertiaryContainerColor,
-                        contentColor =
-                            UiFloatingActionButtonDefaults.TertiaryContentColor
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.Add,
-                            contentDescription = stringResource(
-                                R.string.sample_fab_tertiary
-                            )
-                        )
-                    }
-                }
-            }
-        }
-
-        item {
-            SampleSection(
-                title = stringResource(R.string.sample_fab_expanded_title),
-                description = stringResource(R.string.sample_fab_expanded_description)
-            ) {
-                Column(
-                    verticalArrangement = Arrangement.spacedBy(UiDimensMedium)
-                ) {
-                    UiExtendedFloatingActionButton(
-                        onClick = {
-                            expanded = !expanded
-                        },
-                        expanded = expanded,
-                        text = {
-                            UiText(
-                                text = stringResource(R.string.sample_fab_edit)
-                            )
-                        },
-                        icon = {
-                            Icon(
-                                imageVector = Icons.Default.Edit,
                                 contentDescription = stringResource(
-                                    R.string.sample_fab_toggle
+                                    R.string.sample_fab_small
                                 )
                             )
                         }
+
+                        UiFloatingActionButton(
+                            onClick = {
+                                snackbarHostState.showSampleMessage(
+                                    coroutineScope,
+                                    actionMessage
+                                )
+                            }
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Add,
+                                contentDescription = stringResource(
+                                    R.string.sample_fab_standard
+                                )
+                            )
+                        }
+
+                        UiLargeFloatingActionButton(
+                            onClick = {
+                                snackbarHostState.showSampleMessage(
+                                    coroutineScope,
+                                    actionMessage
+                                )
+                            }
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Add,
+                                contentDescription = stringResource(
+                                    R.string.sample_fab_large
+                                ),
+                                modifier = Modifier.size(
+                                    UiFloatingActionButtonDefaults.LargeIconSize
+                                )
+                            )
+                        }
+
+                        UiExtendedFloatingActionButton(
+                            onClick = {
+                                snackbarHostState.showSampleMessage(
+                                    coroutineScope,
+                                    actionMessage
+                                )
+                            },
+                            text = {
+                                UiText(
+                                    text = stringResource(R.string.sample_fab_add)
+                                )
+                            },
+                            icon = {
+                                Icon(
+                                    imageVector = Icons.Default.Add,
+                                    contentDescription = null
+                                )
+                            }
+                        )
+                    }
+                }
+            }
+
+            item {
+                SampleSection(
+                    title = stringResource(R.string.sample_fab_colors_title),
+                    description = stringResource(R.string.sample_fab_colors_description)
+                ) {
+                    FlowRow(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(UiDimensMedium),
+                        verticalArrangement = Arrangement.spacedBy(UiDimensMedium)
+                    ) {
+                        UiFloatingActionButton(
+                            onClick = {
+                                snackbarHostState.showSampleMessage(
+                                    coroutineScope,
+                                    primaryMessage
+                                )
+                            },
+                            containerColor =
+                                UiFloatingActionButtonDefaults.PrimaryContainerColor,
+                            contentColor =
+                                UiFloatingActionButtonDefaults.PrimaryContentColor
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Add,
+                                contentDescription = stringResource(
+                                    R.string.sample_fab_primary
+                                )
+                            )
+                        }
+
+                        UiFloatingActionButton(
+                            onClick = {
+                                snackbarHostState.showSampleMessage(
+                                    coroutineScope,
+                                    secondaryMessage
+                                )
+                            },
+                            containerColor =
+                                UiFloatingActionButtonDefaults.SecondaryContainerColor,
+                            contentColor =
+                                UiFloatingActionButtonDefaults.SecondaryContentColor
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Add,
+                                contentDescription = stringResource(
+                                    R.string.sample_fab_secondary
+                                )
+                            )
+                        }
+
+                        UiFloatingActionButton(
+                            onClick = {
+                                snackbarHostState.showSampleMessage(
+                                    coroutineScope,
+                                    tertiaryMessage
+                                )
+                            },
+                            containerColor =
+                                UiFloatingActionButtonDefaults.TertiaryContainerColor,
+                            contentColor =
+                                UiFloatingActionButtonDefaults.TertiaryContentColor
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Add,
+                                contentDescription = stringResource(
+                                    R.string.sample_fab_tertiary
+                                )
+                            )
+                        }
+                    }
+                }
+            }
+
+            item {
+                SampleSection(
+                    title = stringResource(R.string.sample_fab_expanded_title),
+                    description = stringResource(R.string.sample_fab_expanded_description)
+                ) {
+                    Column(
+                        verticalArrangement = Arrangement.spacedBy(UiDimensMedium)
+                    ) {
+                        UiExtendedFloatingActionButton(
+                            onClick = {
+                                expanded = !expanded
+                            },
+                            expanded = expanded,
+                            text = {
+                                UiText(
+                                    text = stringResource(R.string.sample_fab_edit)
+                                )
+                            },
+                            icon = {
+                                Icon(
+                                    imageVector = Icons.Default.Edit,
+                                    contentDescription = stringResource(
+                                        R.string.sample_fab_toggle
+                                    )
+                                )
+                            }
+                        )
+
+                        UiText(
+                            text = stringResource(
+                                if (expanded) {
+                                    R.string.sample_fab_expanded_state
+                                } else {
+                                    R.string.sample_fab_collapsed_state
+                                }
+                            )
+                        )
+                    }
+                }
+            }
+
+            item {
+                SampleSection(
+                    title = stringResource(R.string.sample_fab_customization_title),
+                    description = stringResource(
+                        R.string.sample_fab_customization_description
                     )
+                ) {
+                    FlowRow(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(UiDimensMedium),
+                        verticalArrangement = Arrangement.spacedBy(UiDimensMedium)
+                    ) {
+                        UiFloatingActionButton(
+                            onClick = {
+                                snackbarHostState.showSampleMessage(
+                                    coroutineScope,
+                                    actionMessage
+                                )
+                            },
+                            shape = UiShapesCut.medium
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Edit,
+                                contentDescription = stringResource(
+                                    R.string.sample_fab_cut_shape
+                                )
+                            )
+                        }
+
+                        UiFloatingActionButton(
+                            onClick = {
+                                snackbarHostState.showSampleMessage(
+                                    coroutineScope,
+                                    actionMessage
+                                )
+                            },
+                            shape = UiShapeNone
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Edit,
+                                contentDescription = stringResource(
+                                    R.string.sample_fab_square_shape
+                                )
+                            )
+                        }
+
+                        UiFloatingActionButton(
+                            onClick = {
+                                snackbarHostState.showSampleMessage(
+                                    coroutineScope,
+                                    actionMessage
+                                )
+                            },
+                            elevation =
+                                UiFloatingActionButtonDefaults.loweredElevation(),
+                            containerColor =
+                                MaterialTheme.colorScheme.surfaceContainerHigh,
+                            contentColor =
+                                MaterialTheme.colorScheme.onSurface
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Edit,
+                                contentDescription = stringResource(
+                                    R.string.sample_fab_lowered_elevation
+                                )
+                            )
+                        }
+                    }
+                }
+            }
+
+            item {
+                SampleSection(
+                    title = stringResource(R.string.sample_fab_scroll_examples_title),
+                    description = stringResource(R.string.sample_fab_scroll_examples_description)
+                ) {
+                    val modes = SampleScrollFabMode.entries
+
+                    SingleChoiceSegmentedButtonRow(
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        modes.forEachIndexed { index, mode ->
+                            SegmentedButton(
+                                selected = scrollFabMode == mode,
+                                onClick = {
+                                    scrollFabMode = mode
+                                },
+                                shape = SegmentedButtonDefaults.itemShape(
+                                    index = index,
+                                    count = modes.size
+                                ),
+                                label = {
+                                    UiText(
+                                        text = stringResource(
+                                            when (mode) {
+                                                SampleScrollFabMode.ScrollToTop ->
+                                                    R.string.sample_fab_mode_scroll_to_top
+
+                                                SampleScrollFabMode.Bidirectional ->
+                                                    R.string.sample_fab_mode_bidirectional
+                                            }
+                                        )
+                                    )
+                                }
+                            )
+                        }
+                    }
 
                     UiText(
                         text = stringResource(
-                            if (expanded) {
-                                R.string.sample_fab_expanded_state
-                            } else {
-                                R.string.sample_fab_collapsed_state
+                            when (scrollFabMode) {
+                                SampleScrollFabMode.ScrollToTop ->
+                                    R.string.sample_fab_scroll_to_top_hint
+
+                                SampleScrollFabMode.Bidirectional ->
+                                    R.string.sample_fab_bidirectional_hint
                             }
                         )
                     )
                 }
             }
-        }
 
-        item {
-            SampleSection(
-                title = stringResource(R.string.sample_fab_customization_title),
-                description = stringResource(
-                    R.string.sample_fab_customization_description
-                )
-            ) {
-                FlowRow(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(UiDimensMedium),
-                    verticalArrangement = Arrangement.spacedBy(UiDimensMedium)
-                ) {
-                    UiFloatingActionButton(
-                        onClick = {
-                            snackbarHostState.showSampleMessage(
-                                coroutineScope,
-                                actionMessage
-                            )
-                        },
-                        shape = UiShapesCut.medium
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.Edit,
-                            contentDescription = stringResource(
-                                R.string.sample_fab_cut_shape
-                            )
-                        )
-                    }
-
-                    UiFloatingActionButton(
-                        onClick = {
-                            snackbarHostState.showSampleMessage(
-                                coroutineScope,
-                                actionMessage
-                            )
-                        },
-                        shape = UiShapeNone
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.Edit,
-                            contentDescription = stringResource(
-                                R.string.sample_fab_square_shape
-                            )
-                        )
-                    }
-
-                    UiFloatingActionButton(
-                        onClick = {
-                            snackbarHostState.showSampleMessage(
-                                coroutineScope,
-                                actionMessage
-                            )
-                        },
-                        elevation =
-                            UiFloatingActionButtonDefaults.loweredElevation(),
-                        containerColor =
-                            MaterialTheme.colorScheme.surfaceContainerHigh,
-                        contentColor =
-                            MaterialTheme.colorScheme.onSurface
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.Edit,
-                            contentDescription = stringResource(
-                                R.string.sample_fab_lowered_elevation
-                            )
-                        )
-                    }
-                }
-            }
         }
     }
 }

@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -16,6 +17,7 @@ import io.github.ordonovus.component.text.UiText
 import io.github.ordonovus.component.text.UiTextVariant
 import io.github.ordonovus.sample.R
 import io.github.ordonovus.sample.ui.layout.SampleComponentHeader
+import io.github.ordonovus.sample.ui.layout.SampleScrollToTopContainer
 import io.github.ordonovus.sample.ui.layout.SampleSection
 import io.github.ordonovus.sample.ui.preview.SamplePreview
 import io.github.ordonovus.sample.ui.preview.SamplePreviewDevice
@@ -40,101 +42,108 @@ import io.github.ordonovus.theme.UiTypographyTitle
  */
 @Composable
 fun UiTypographySample() {
-    LazyColumn(
-        modifier = Modifier.fillMaxSize(),
-        contentPadding = PaddingValues(UiDimensMedium),
-        verticalArrangement = Arrangement.spacedBy(UiDimensLarge)
+    val listState = rememberLazyListState()
+
+    SampleScrollToTopContainer(
+        listState = listState
     ) {
-        item {
-            SampleComponentHeader(
-                title = stringResource(R.string.sample_typography_title),
-                description = stringResource(
-                    R.string.sample_typography_description
-                ),
-                demo = {
-                    UiTypographyHeaderDemo()
-                }
-            )
-        }
-
-        item {
-            SampleSection(
-                title = stringResource(
-                    R.string.sample_typography_styles_title
-                ),
-                description = stringResource(
-                    R.string.sample_typography_styles_description
-                )
-            ) {
-                Text(
-                    text = stringResource(R.string.sample_typography_display),
-                    style = UiTypographyDisplay
-                )
-
-                Text(
-                    text = stringResource(R.string.sample_typography_heading),
-                    style = UiTypographyHeading
-                )
-
-                Text(
-                    text = stringResource(
-                        R.string.sample_typography_variant_title
+        LazyColumn(
+            state = listState,
+            modifier = Modifier.fillMaxSize(),
+            contentPadding = PaddingValues(UiDimensMedium),
+            verticalArrangement = Arrangement.spacedBy(UiDimensLarge)
+        ) {
+            item {
+                SampleComponentHeader(
+                    title = stringResource(R.string.sample_typography_title),
+                    description = stringResource(
+                        R.string.sample_typography_description
                     ),
-                    style = UiTypographyTitle
-                )
-
-                Text(
-                    text = stringResource(R.string.sample_typography_body),
-                    style = UiTypographyBody
-                )
-
-                Text(
-                    text = stringResource(
-                        R.string.sample_typography_body_secondary
-                    ),
-                    style = UiTypographyBodySecondary
-                )
-
-                Text(
-                    text = stringResource(R.string.sample_typography_label),
-                    style = UiTypographyLabel
+                    demo = {
+                        UiTypographyHeaderDemo()
+                    }
                 )
             }
-        }
 
-        item {
-            SampleSection(
-                title = stringResource(
-                    R.string.sample_typography_custom_title
-                ),
-                description = stringResource(
-                    R.string.sample_typography_custom_description
-                )
-            ) {
-                UiText(
-                    text = stringResource(
-                        R.string.sample_typography_default_example
+            item {
+                SampleSection(
+                    title = stringResource(
+                        R.string.sample_typography_styles_title
                     ),
-                    variant = UiTextVariant.Heading
-                )
-
-                val customTypography = MaterialTheme.typography.copy(
-                    headlineLarge = MaterialTheme.typography.headlineLarge.copy(
-                        fontFamily = FontFamily.Serif
+                    description = stringResource(
+                        R.string.sample_typography_styles_description
                     )
-                )
+                ) {
+                    Text(
+                        text = stringResource(R.string.sample_typography_display),
+                        style = UiTypographyDisplay
+                    )
 
-                UiKitTheme(
-                    colorScheme = MaterialTheme.colorScheme,
-                    typography = customTypography
+                    Text(
+                        text = stringResource(R.string.sample_typography_heading),
+                        style = UiTypographyHeading
+                    )
+
+                    Text(
+                        text = stringResource(
+                            R.string.sample_typography_variant_title
+                        ),
+                        style = UiTypographyTitle
+                    )
+
+                    Text(
+                        text = stringResource(R.string.sample_typography_body),
+                        style = UiTypographyBody
+                    )
+
+                    Text(
+                        text = stringResource(
+                            R.string.sample_typography_body_secondary
+                        ),
+                        style = UiTypographyBodySecondary
+                    )
+
+                    Text(
+                        text = stringResource(R.string.sample_typography_label),
+                        style = UiTypographyLabel
+                    )
+                }
+            }
+
+            item {
+                SampleSection(
+                    title = stringResource(
+                        R.string.sample_typography_custom_title
+                    ),
+                    description = stringResource(
+                        R.string.sample_typography_custom_description
+                    )
                 ) {
                     UiText(
                         text = stringResource(
-                            R.string.sample_typography_custom_example
+                            R.string.sample_typography_default_example
                         ),
-                        modifier = Modifier.fillMaxWidth(),
                         variant = UiTextVariant.Heading
                     )
+
+                    val customTypography = MaterialTheme.typography.copy(
+                        headlineLarge = MaterialTheme.typography.headlineLarge.copy(
+                            fontFamily = FontFamily.Serif
+                        )
+                    )
+
+                    UiKitTheme(
+                        colorScheme = MaterialTheme.colorScheme,
+                        typography = customTypography
+                    ) {
+                        UiText(
+                            text = stringResource(
+                                R.string.sample_typography_custom_example
+                            ),
+                            modifier = Modifier.fillMaxWidth(),
+                            variant = UiTextVariant.Heading
+                        )
+                    }
                 }
             }
         }

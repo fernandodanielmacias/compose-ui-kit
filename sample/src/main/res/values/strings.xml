@@ -346,4 +346,17 @@
     <string name="sample_fab_secondary_message">Secondary FAB clicked</string>
     <string name="sample_fab_tertiary_message">Tertiary FAB clicked</string>
 
+    <!-- Scroll navigation floating action button accessibility -->
+    <string name="sample_fab_scroll_to_top">Scroll to top</string>
+    <string name="sample_fab_scroll_to_bottom">Scroll to bottom</string>
+    <string name="sample_fab_scroll_navigation">Scroll navigation options</string>
+
+    <!-- Floating action button scroll navigation demonstrations -->
+    <string name="sample_fab_scroll_examples_title">Scroll navigation</string>
+    <string name="sample_fab_scroll_examples_description">Explore contextual floating action buttons for navigating long lists.</string>
+    <string name="sample_fab_mode_scroll_to_top">Scroll to top</string>
+    <string name="sample_fab_mode_bidirectional">Both directions</string>
+    <string name="sample_fab_scroll_to_top_hint">Scroll down the catalog to reveal the button, then tap it to return to the beginning.</string>
+    <string name="sample_fab_bidirectional_hint">Use the floating button to navigate to the beginning or end. At intermediate positions, choose a direction from the menu.</string>
+
 </resources>

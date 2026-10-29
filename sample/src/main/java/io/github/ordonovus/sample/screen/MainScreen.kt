@@ -39,6 +39,7 @@ import io.github.ordonovus.sample.settings.SampleThemeMode
 import io.github.ordonovus.sample.ui.feedback.LocalSampleSnackbarHostState
 import io.github.ordonovus.sample.ui.layout.SampleDrawerWidth
 import io.github.ordonovus.sample.ui.layout.SamplePermanentDrawerBreakpoint
+import io.github.ordonovus.ui.keyboard.rememberUiKeyboardController
 import kotlinx.coroutines.launch
 
 /**
@@ -56,6 +57,8 @@ fun MainScreen(
 ) {
     var selectedSample by rememberSaveable { mutableStateOf(initialSample) }
     var isDrawerExpanded by rememberSaveable { mutableStateOf(true) }
+
+    val keyboardController = rememberUiKeyboardController()
 
     val windowInfo = LocalWindowInfo.current
     val density = LocalDensity.current
@@ -80,6 +83,7 @@ fun MainScreen(
                         SampleNavigationDrawer(
                             selectedSample = selectedSample,
                             onSampleSelected = {
+                                keyboardController.dismiss()
                                 selectedSample = it
                             }
                         )
@@ -95,6 +99,7 @@ fun MainScreen(
                 selectedThemeMode = selectedThemeMode,
                 onThemeModeSelected = onThemeModeSelected,
                 onMenuClick = {
+                    keyboardController.dismiss()
                     isDrawerExpanded = !isDrawerExpanded
                 }
             )
@@ -114,7 +119,9 @@ fun MainScreen(
                     SampleNavigationDrawer(
                         selectedSample = selectedSample,
                         onSampleSelected = { component ->
+                            keyboardController.dismiss()
                             selectedSample = component
+
                             scope.launch {
                                 drawerState.close()
                             }
@@ -129,6 +136,8 @@ fun MainScreen(
                 selectedThemeMode = selectedThemeMode,
                 onThemeModeSelected = onThemeModeSelected,
                 onMenuClick = {
+                    keyboardController.dismiss()
+
                     scope.launch {
                         drawerState.open()
                     }

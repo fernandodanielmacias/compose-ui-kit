@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.text.input.KeyboardActionHandler
 import androidx.compose.foundation.text.input.rememberTextFieldState
@@ -38,6 +39,7 @@ import io.github.ordonovus.sample.R
 import io.github.ordonovus.sample.ui.feedback.LocalSampleSnackbarHostState
 import io.github.ordonovus.sample.ui.feedback.showSampleMessage
 import io.github.ordonovus.sample.ui.layout.SampleComponentHeader
+import io.github.ordonovus.sample.ui.layout.SampleScrollToTopContainer
 import io.github.ordonovus.sample.ui.preview.SamplePreview
 import io.github.ordonovus.sample.ui.layout.SampleSection
 import io.github.ordonovus.sample.ui.preview.SamplePreviewDevice
@@ -78,6 +80,8 @@ fun UiTextFieldSample() {
     val snackbarHostState = LocalSampleSnackbarHostState.current
     val coroutineScope = rememberCoroutineScope()
 
+    val listState = rememberLazyListState()
+
     val searchMessage = stringResource(R.string.sample_text_fields_search_feedback)
 
     val validationState = rememberTextFieldState()
@@ -105,395 +109,400 @@ fun UiTextFieldSample() {
         )
     )
 
-    LazyColumn(
-        modifier = Modifier
-            .fillMaxSize()
-            .imePadding(),
-        contentPadding = PaddingValues(UiDimensMedium),
-        verticalArrangement = Arrangement.spacedBy(UiDimensLarge)
+    SampleScrollToTopContainer(
+        listState = listState
     ) {
-        item {
-            SampleComponentHeader(
-                title = stringResource(R.string.sample_text_fields_title),
-                description = stringResource(R.string.sample_text_fields_description),
-                demo = {
-                    UiTextFieldHeaderDemo()
-                }
-            )
-        }
-
-        item {
-            SampleSection(
-                title = stringResource(R.string.sample_text_fields_variants_title),
-                description = stringResource(R.string.sample_text_fields_variants_description)
-            ) {
-                UiTextField(
-                    state = filledState,
-                    modifier = Modifier.fillMaxWidth(),
-                    label = {
-                        UiText(stringResource(R.string.sample_text_fields_filled))
-                    },
-                    placeholder = {
-                        UiText(stringResource(R.string.sample_text_fields_placeholder))
-                    }
-                )
-
-                UiOutlinedTextField(
-                    state = outlinedState,
-                    modifier = Modifier.fillMaxWidth(),
-                    iconColors = UiTextFieldIconDefaults.colors(
-                        action = MaterialTheme.colorScheme.tertiary
-                    ),
-                    label = {
-                        UiText(stringResource(R.string.sample_text_fields_outlined))
-                    },
-                    placeholder = {
-                        UiText(stringResource(R.string.sample_text_fields_placeholder))
+        LazyColumn(
+            state = listState,
+            modifier = Modifier
+                .fillMaxSize()
+                .imePadding(),
+            contentPadding = PaddingValues(UiDimensMedium),
+            verticalArrangement = Arrangement.spacedBy(UiDimensLarge)
+        ) {
+            item {
+                SampleComponentHeader(
+                    title = stringResource(R.string.sample_text_fields_title),
+                    description = stringResource(R.string.sample_text_fields_description),
+                    demo = {
+                        UiTextFieldHeaderDemo()
                     }
                 )
             }
-        }
 
-        item {
-            SampleSection(
-                title = stringResource(R.string.sample_text_fields_icons_title),
-                description = stringResource(R.string.sample_text_fields_icons_description)
-            ) {
-                UiOutlinedTextField(
-                    state = iconState,
-                    modifier = Modifier.fillMaxWidth(),
-                    label = {
-                        UiText(stringResource(R.string.sample_text_fields_search_label))
-                    },
-                    placeholder = {
-                        UiText(stringResource(R.string.sample_text_fields_search_placeholder))
-                    },
-                    leadingIcon = {
-                        Icon(
-                            imageVector = Icons.Default.Search,
-                            contentDescription = null,
-                            tint = MaterialTheme.colorScheme.primary
-                        )
-                    },
-                    showClearButton = true,
-                    keyboardOptions = KeyboardOptions(
-                        imeAction = ImeAction.Search
-                    ),
-                    onKeyboardAction = KeyboardActionHandler {
-                        snackbarHostState.showSampleMessage(
-                            scope = coroutineScope,
-                            message = searchMessage
-                        )
-                    }
-                )
-
-                UiTextField(
-                    state = supportingState,
-                    modifier = Modifier.fillMaxWidth(),
-                    showClearButton = false,
-                    label = {
-                        UiText(stringResource(R.string.sample_text_fields_username_label))
-                    },
-                    supportingText = {
-                        UiText(stringResource(R.string.sample_text_fields_username_supporting))
-                    }
-                )
-
-                UiOutlinedTextField(
-                    state = verifiedState,
-                    modifier = Modifier.fillMaxWidth(),
-                    label = {
-                        UiText(
-                            stringResource(R.string.sample_text_fields_verified_label)
-                        )
-                    },
-                    placeholder = {
-                        UiText(
-                            stringResource(R.string.sample_text_fields_verified_placeholder)
-                        )
-                    },
-                    trailingIcon = {
-                        Icon(
-                            imageVector = Icons.Default.CheckCircle,
-                            contentDescription = null,
-                            tint = MaterialTheme.colorScheme.primary
-                        )
-                    },
-                    showClearButton = true
-                )
-            }
-        }
-
-        item {
-            SampleSection(
-                title = stringResource(R.string.sample_text_fields_affixes_title),
-                description = stringResource(R.string.sample_text_fields_affixes_description)
-            ) {
-                UiOutlinedTextField(
-                    state = priceState,
-                    modifier = Modifier.fillMaxWidth(),
-                    label = {
-                        UiText(stringResource(R.string.sample_text_fields_price_label))
-                    },
-                    prefix = {
-                        UiText(stringResource(R.string.sample_text_fields_currency_prefix))
-                    },
-                    keyboardOptions = UiTextFieldDefaults.keyboardOptions(
-                        keyboardType = KeyboardType.Decimal
-                    ),
-                    showClearButton = false
-                )
-
-                UiTextField(
-                    state = weightState,
-                    modifier = Modifier.fillMaxWidth(),
-                    label = {
-                        UiText(stringResource(R.string.sample_text_fields_weight_label))
-                    },
-                    suffix = {
-                        UiText(stringResource(R.string.sample_text_fields_weight_suffix))
-                    },
-                    keyboardOptions = UiTextFieldDefaults.keyboardOptions(
-                        keyboardType = KeyboardType.Decimal
-                    ),
-                    showClearButton = false
-                )
-            }
-        }
-
-        item {
-            SampleSection(
-                title = stringResource(R.string.sample_text_fields_transformations_title),
-                description = stringResource(R.string.sample_text_fields_transformations_description)
-            ) {
-                UiOutlinedTextField(
-                    state = numericState,
-                    modifier = Modifier.fillMaxWidth(),
-                    label = {
-                        UiText(
-                            stringResource(
-                                R.string.sample_text_fields_digits_only_label
-                            )
-                        )
-                    },
-                    supportingText = {
-                        UiText(
-                            stringResource(
-                                R.string.sample_text_fields_digits_only_supporting
-                            )
-                        )
-                    },
-                    keyboardOptions = UiTextFieldDefaults.keyboardOptions(
-                        keyboardType = KeyboardType.Number
-                    ),
-                    inputTransformation = UiTextFieldTransformations.digitsOnly(),
-                    maxLength = 8,
-                    showCharacterCount = true,
-                    showClearButton = false
-                )
-
-                UiTextField(
-                    state = formattedState,
-                    modifier = Modifier.fillMaxWidth(),
-                    label = {
-                        UiText(
-                            stringResource(
-                                R.string.sample_text_fields_formatted_label
-                            )
-                        )
-                    },
-                    supportingText = {
-                        UiText(
-                            stringResource(
-                                R.string.sample_text_fields_formatted_supporting
-                            )
-                        )
-                    },
-                    keyboardOptions = UiTextFieldDefaults.keyboardOptions(
-                        keyboardType = KeyboardType.Number
-                    ),
-                    inputTransformation =  UiTextFieldTransformations.digitsOnly(),
-                    outputTransformation = UiTextFieldTransformations.groupedCharacters(),
-                    maxLength = 8,
-                    showCharacterCount = true,
-                    showClearButton = false
-                )
-            }
-        }
-
-        item {
-            SampleSection(
-                title = stringResource(R.string.sample_text_fields_customization_title),
-                description = stringResource(R.string.sample_text_fields_customization_description)
-            ) {
-                UiOutlinedTextField(
-                    state = customOutlinedState,
-                    modifier = Modifier.fillMaxWidth(),
-                    label = {
-                        UiText(
-                            stringResource(R.string.sample_text_fields_custom_outlined_label)
-                        )
-                    },
-                    placeholder = {
-                        UiText(
-                            stringResource(R.string.sample_text_fields_custom_placeholder)
-                        )
-                    },
-                    shape = UiShapesCut.extraSmall,
-                    colors = OutlinedTextFieldDefaults.colors(
-                        focusedBorderColor = SampleCustomizationAccentColor,
-                        unfocusedBorderColor = SampleCustomizationAccentColor,
-                        focusedLabelColor = SampleCustomizationAccentColor,
-                        unfocusedLabelColor = SampleCustomizationAccentColor,
-                        focusedTextColor = SampleCustomizationAccentColor,
-                        unfocusedTextColor = MaterialTheme.colorScheme.onSurface
-                    ),
-                    focusedBorderThickness = UiStrokeThick,
-                    unfocusedBorderThickness = UiStrokeMedium,
-                    showClearButton = false
-                )
-
-                UiTextField(
-                    state = customFilledState,
-                    modifier = Modifier.fillMaxWidth(),
-                    label = {
-                        UiText(
-                            stringResource(R.string.sample_text_fields_custom_filled_label)
-                        )
-                    },
-                    placeholder = {
-                        UiText(
-                            stringResource(R.string.sample_text_fields_custom_placeholder)
-                        )
-                    },
-                    shape = UiShapes.medium,
-                    colors = TextFieldDefaults.colors(
-                        focusedIndicatorColor = SampleCustomizationAccentColor,
-                        unfocusedIndicatorColor = SampleCustomizationAccentColor,
-                        focusedLabelColor = SampleCustomizationAccentColor,
-                        unfocusedLabelColor = SampleCustomizationAccentColor,
-                        focusedTextColor = SampleCustomizationAccentColor,
-                        unfocusedTextColor = MaterialTheme.colorScheme.onSurface
-                    ),
-                    focusedIndicatorThickness = UiStrokeThick,
-                    unfocusedIndicatorThickness = UiStrokeMedium,
-                    showClearButton = false
-                )
-            }
-        }
-
-        item {
-            SampleSection(
-                title = stringResource(R.string.sample_text_fields_multiline_title),
-                description = stringResource(R.string.sample_text_fields_multiline_description)
-            ) {
-                UiOutlinedTextField(
-                    state = limitedState,
-                    modifier = Modifier.fillMaxWidth(),
-                    label = {
-                        UiText(stringResource(R.string.sample_text_fields_description_label))
-                    },
-                    placeholder = {
-                        UiText(stringResource(R.string.sample_text_fields_maximum_placeholder))
-                    },
-                    maxLength = 50,
-                    showCharacterCount = true,
-                    lineLimits = UiTextFieldDefaults.multiLine()
-                )
-            }
-        }
-
-        item {
-            SampleSection(
-                title = stringResource(R.string.sample_text_fields_validation_title),
-                description = stringResource(R.string.sample_text_fields_validation_description)
-            ) {
-                UiOutlinedTextField(
-                    state = validationState,
-                    modifier = Modifier.fillMaxWidth(),
-                    label = {
-                        UiText(
-                            stringResource(R.string.sample_text_fields_access_code_label)
-                        )
-                    },
-                    placeholder = {
-                        UiText(
-                            stringResource(R.string.sample_text_fields_access_code_placeholder)
-                        )
-                    },
-                    supportingText = {
-                        if (validationRequested && validationError == null) {
-                            UiText(
-                                text = stringResource(
-                                    R.string.sample_text_fields_validation_success
-                                ),
-                                color = MaterialTheme.colorScheme.primary
-                            )
-                        } else {
-                            UiText(
-                                text = stringResource(
-                                    R.string.sample_text_fields_access_code_supporting
-                                )
-                            )
-                        }
-                    },
-                    keyboardOptions = UiTextFieldDefaults.keyboardOptions(
-                        keyboardType = KeyboardType.Number
-                    ),
-                    inputTransformation = UiTextFieldTransformations.digitsOnly(),
-                    maxLength = 6,
-                    isError = validationError != null,
-                    errorText = validationError?.let { stringResource(it) },
-                    showClearButton = true
-                )
-
-                UiButton(
-                    onClick = {
-                        validationRequested = true
-                    },
-                    modifier = Modifier.fillMaxWidth()
+            item {
+                SampleSection(
+                    title = stringResource(R.string.sample_text_fields_variants_title),
+                    description = stringResource(R.string.sample_text_fields_variants_description)
                 ) {
-                    UiText(
-                        stringResource(R.string.sample_text_fields_validate_action)
+                    UiTextField(
+                        state = filledState,
+                        modifier = Modifier.fillMaxWidth(),
+                        label = {
+                            UiText(stringResource(R.string.sample_text_fields_filled))
+                        },
+                        placeholder = {
+                            UiText(stringResource(R.string.sample_text_fields_placeholder))
+                        }
+                    )
+
+                    UiOutlinedTextField(
+                        state = outlinedState,
+                        modifier = Modifier.fillMaxWidth(),
+                        iconColors = UiTextFieldIconDefaults.colors(
+                            action = MaterialTheme.colorScheme.tertiary
+                        ),
+                        label = {
+                            UiText(stringResource(R.string.sample_text_fields_outlined))
+                        },
+                        placeholder = {
+                            UiText(stringResource(R.string.sample_text_fields_placeholder))
+                        }
                     )
                 }
             }
-        }
 
-        item {
-            SampleSection(
-                title = stringResource(R.string.sample_text_fields_states_title),
-                description = stringResource(R.string.sample_text_fields_states_description)
-            ) {
-                UiOutlinedTextField(
-                    state = disabledState,
-                    modifier = Modifier.fillMaxWidth(),
-                    enabled = false,
-                    label = {
-                        UiText(stringResource(R.string.sample_text_fields_disabled_label))
-                    }
-                )
+            item {
+                SampleSection(
+                    title = stringResource(R.string.sample_text_fields_icons_title),
+                    description = stringResource(R.string.sample_text_fields_icons_description)
+                ) {
+                    UiOutlinedTextField(
+                        state = iconState,
+                        modifier = Modifier.fillMaxWidth(),
+                        label = {
+                            UiText(stringResource(R.string.sample_text_fields_search_label))
+                        },
+                        placeholder = {
+                            UiText(stringResource(R.string.sample_text_fields_search_placeholder))
+                        },
+                        leadingIcon = {
+                            Icon(
+                                imageVector = Icons.Default.Search,
+                                contentDescription = null,
+                                tint = MaterialTheme.colorScheme.primary
+                            )
+                        },
+                        showClearButton = true,
+                        keyboardOptions = KeyboardOptions(
+                            imeAction = ImeAction.Search
+                        ),
+                        onKeyboardAction = KeyboardActionHandler {
+                            snackbarHostState.showSampleMessage(
+                                scope = coroutineScope,
+                                message = searchMessage
+                            )
+                        }
+                    )
 
-                UiOutlinedTextField(
-                    state = readOnlyState,
-                    modifier = Modifier.fillMaxWidth(),
-                    readOnly = true,
-                    label = {
-                        UiText(stringResource(R.string.sample_text_fields_read_only_label))
-                    }
-                )
+                    UiTextField(
+                        state = supportingState,
+                        modifier = Modifier.fillMaxWidth(),
+                        showClearButton = false,
+                        label = {
+                            UiText(stringResource(R.string.sample_text_fields_username_label))
+                        },
+                        supportingText = {
+                            UiText(stringResource(R.string.sample_text_fields_username_supporting))
+                        }
+                    )
+
+                    UiOutlinedTextField(
+                        state = verifiedState,
+                        modifier = Modifier.fillMaxWidth(),
+                        label = {
+                            UiText(
+                                stringResource(R.string.sample_text_fields_verified_label)
+                            )
+                        },
+                        placeholder = {
+                            UiText(
+                                stringResource(R.string.sample_text_fields_verified_placeholder)
+                            )
+                        },
+                        trailingIcon = {
+                            Icon(
+                                imageVector = Icons.Default.CheckCircle,
+                                contentDescription = null,
+                                tint = MaterialTheme.colorScheme.primary
+                            )
+                        },
+                        showClearButton = true
+                    )
+                }
             }
-        }
 
-        item {
-            SampleSection(
-                title = stringResource(R.string.sample_text_fields_password_title),
-                description = stringResource(R.string.sample_text_fields_password_description)
-            ) {
-                UiTextFieldPasswordDemo()
+            item {
+                SampleSection(
+                    title = stringResource(R.string.sample_text_fields_affixes_title),
+                    description = stringResource(R.string.sample_text_fields_affixes_description)
+                ) {
+                    UiOutlinedTextField(
+                        state = priceState,
+                        modifier = Modifier.fillMaxWidth(),
+                        label = {
+                            UiText(stringResource(R.string.sample_text_fields_price_label))
+                        },
+                        prefix = {
+                            UiText(stringResource(R.string.sample_text_fields_currency_prefix))
+                        },
+                        keyboardOptions = UiTextFieldDefaults.keyboardOptions(
+                            keyboardType = KeyboardType.Decimal
+                        ),
+                        showClearButton = false
+                    )
+
+                    UiTextField(
+                        state = weightState,
+                        modifier = Modifier.fillMaxWidth(),
+                        label = {
+                            UiText(stringResource(R.string.sample_text_fields_weight_label))
+                        },
+                        suffix = {
+                            UiText(stringResource(R.string.sample_text_fields_weight_suffix))
+                        },
+                        keyboardOptions = UiTextFieldDefaults.keyboardOptions(
+                            keyboardType = KeyboardType.Decimal
+                        ),
+                        showClearButton = false
+                    )
+                }
             }
-        }
 
+            item {
+                SampleSection(
+                    title = stringResource(R.string.sample_text_fields_transformations_title),
+                    description = stringResource(R.string.sample_text_fields_transformations_description)
+                ) {
+                    UiOutlinedTextField(
+                        state = numericState,
+                        modifier = Modifier.fillMaxWidth(),
+                        label = {
+                            UiText(
+                                stringResource(
+                                    R.string.sample_text_fields_digits_only_label
+                                )
+                            )
+                        },
+                        supportingText = {
+                            UiText(
+                                stringResource(
+                                    R.string.sample_text_fields_digits_only_supporting
+                                )
+                            )
+                        },
+                        keyboardOptions = UiTextFieldDefaults.keyboardOptions(
+                            keyboardType = KeyboardType.Number
+                        ),
+                        inputTransformation = UiTextFieldTransformations.digitsOnly(),
+                        maxLength = 8,
+                        showCharacterCount = true,
+                        showClearButton = false
+                    )
+
+                    UiTextField(
+                        state = formattedState,
+                        modifier = Modifier.fillMaxWidth(),
+                        label = {
+                            UiText(
+                                stringResource(
+                                    R.string.sample_text_fields_formatted_label
+                                )
+                            )
+                        },
+                        supportingText = {
+                            UiText(
+                                stringResource(
+                                    R.string.sample_text_fields_formatted_supporting
+                                )
+                            )
+                        },
+                        keyboardOptions = UiTextFieldDefaults.keyboardOptions(
+                            keyboardType = KeyboardType.Number
+                        ),
+                        inputTransformation =  UiTextFieldTransformations.digitsOnly(),
+                        outputTransformation = UiTextFieldTransformations.groupedCharacters(),
+                        maxLength = 8,
+                        showCharacterCount = true,
+                        showClearButton = false
+                    )
+                }
+            }
+
+            item {
+                SampleSection(
+                    title = stringResource(R.string.sample_text_fields_customization_title),
+                    description = stringResource(R.string.sample_text_fields_customization_description)
+                ) {
+                    UiOutlinedTextField(
+                        state = customOutlinedState,
+                        modifier = Modifier.fillMaxWidth(),
+                        label = {
+                            UiText(
+                                stringResource(R.string.sample_text_fields_custom_outlined_label)
+                            )
+                        },
+                        placeholder = {
+                            UiText(
+                                stringResource(R.string.sample_text_fields_custom_placeholder)
+                            )
+                        },
+                        shape = UiShapesCut.extraSmall,
+                        colors = OutlinedTextFieldDefaults.colors(
+                            focusedBorderColor = SampleCustomizationAccentColor,
+                            unfocusedBorderColor = SampleCustomizationAccentColor,
+                            focusedLabelColor = SampleCustomizationAccentColor,
+                            unfocusedLabelColor = SampleCustomizationAccentColor,
+                            focusedTextColor = SampleCustomizationAccentColor,
+                            unfocusedTextColor = MaterialTheme.colorScheme.onSurface
+                        ),
+                        focusedBorderThickness = UiStrokeThick,
+                        unfocusedBorderThickness = UiStrokeMedium,
+                        showClearButton = false
+                    )
+
+                    UiTextField(
+                        state = customFilledState,
+                        modifier = Modifier.fillMaxWidth(),
+                        label = {
+                            UiText(
+                                stringResource(R.string.sample_text_fields_custom_filled_label)
+                            )
+                        },
+                        placeholder = {
+                            UiText(
+                                stringResource(R.string.sample_text_fields_custom_placeholder)
+                            )
+                        },
+                        shape = UiShapes.medium,
+                        colors = TextFieldDefaults.colors(
+                            focusedIndicatorColor = SampleCustomizationAccentColor,
+                            unfocusedIndicatorColor = SampleCustomizationAccentColor,
+                            focusedLabelColor = SampleCustomizationAccentColor,
+                            unfocusedLabelColor = SampleCustomizationAccentColor,
+                            focusedTextColor = SampleCustomizationAccentColor,
+                            unfocusedTextColor = MaterialTheme.colorScheme.onSurface
+                        ),
+                        focusedIndicatorThickness = UiStrokeThick,
+                        unfocusedIndicatorThickness = UiStrokeMedium,
+                        showClearButton = false
+                    )
+                }
+            }
+
+            item {
+                SampleSection(
+                    title = stringResource(R.string.sample_text_fields_multiline_title),
+                    description = stringResource(R.string.sample_text_fields_multiline_description)
+                ) {
+                    UiOutlinedTextField(
+                        state = limitedState,
+                        modifier = Modifier.fillMaxWidth(),
+                        label = {
+                            UiText(stringResource(R.string.sample_text_fields_description_label))
+                        },
+                        placeholder = {
+                            UiText(stringResource(R.string.sample_text_fields_maximum_placeholder))
+                        },
+                        maxLength = 50,
+                        showCharacterCount = true,
+                        lineLimits = UiTextFieldDefaults.multiLine()
+                    )
+                }
+            }
+
+            item {
+                SampleSection(
+                    title = stringResource(R.string.sample_text_fields_validation_title),
+                    description = stringResource(R.string.sample_text_fields_validation_description)
+                ) {
+                    UiOutlinedTextField(
+                        state = validationState,
+                        modifier = Modifier.fillMaxWidth(),
+                        label = {
+                            UiText(
+                                stringResource(R.string.sample_text_fields_access_code_label)
+                            )
+                        },
+                        placeholder = {
+                            UiText(
+                                stringResource(R.string.sample_text_fields_access_code_placeholder)
+                            )
+                        },
+                        supportingText = {
+                            if (validationRequested && validationError == null) {
+                                UiText(
+                                    text = stringResource(
+                                        R.string.sample_text_fields_validation_success
+                                    ),
+                                    color = MaterialTheme.colorScheme.primary
+                                )
+                            } else {
+                                UiText(
+                                    text = stringResource(
+                                        R.string.sample_text_fields_access_code_supporting
+                                    )
+                                )
+                            }
+                        },
+                        keyboardOptions = UiTextFieldDefaults.keyboardOptions(
+                            keyboardType = KeyboardType.Number
+                        ),
+                        inputTransformation = UiTextFieldTransformations.digitsOnly(),
+                        maxLength = 6,
+                        isError = validationError != null,
+                        errorText = validationError?.let { stringResource(it) },
+                        showClearButton = true
+                    )
+
+                    UiButton(
+                        onClick = {
+                            validationRequested = true
+                        },
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        UiText(
+                            stringResource(R.string.sample_text_fields_validate_action)
+                        )
+                    }
+                }
+            }
+
+            item {
+                SampleSection(
+                    title = stringResource(R.string.sample_text_fields_states_title),
+                    description = stringResource(R.string.sample_text_fields_states_description)
+                ) {
+                    UiOutlinedTextField(
+                        state = disabledState,
+                        modifier = Modifier.fillMaxWidth(),
+                        enabled = false,
+                        label = {
+                            UiText(stringResource(R.string.sample_text_fields_disabled_label))
+                        }
+                    )
+
+                    UiOutlinedTextField(
+                        state = readOnlyState,
+                        modifier = Modifier.fillMaxWidth(),
+                        readOnly = true,
+                        label = {
+                            UiText(stringResource(R.string.sample_text_fields_read_only_label))
+                        }
+                    )
+                }
+            }
+
+            item {
+                SampleSection(
+                    title = stringResource(R.string.sample_text_fields_password_title),
+                    description = stringResource(R.string.sample_text_fields_password_description)
+                ) {
+                    UiTextFieldPasswordDemo()
+                }
+            }
+
+        }
     }
 }
 

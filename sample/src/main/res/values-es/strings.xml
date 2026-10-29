@@ -343,4 +343,17 @@
     <string name="sample_fab_secondary_message">FAB secundario presionado</string>
     <string name="sample_fab_tertiary_message">FAB terciario presionado</string>
 
+    <!-- Accesibilidad del botón flotante de navegación por desplazamiento -->
+    <string name="sample_fab_scroll_to_top">Volver al inicio</string>
+    <string name="sample_fab_scroll_to_bottom">Ir al final</string>
+    <string name="sample_fab_scroll_navigation">Opciones de desplazamiento</string>
+
+    <!-- Demostraciones de navegación por desplazamiento con botones flotantes -->
+    <string name="sample_fab_scroll_examples_title">Navegación por desplazamiento</string>
+    <string name="sample_fab_scroll_examples_description">Explora los botones flotantes contextuales para navegar por listas largas.</string>
+    <string name="sample_fab_mode_scroll_to_top">Volver al inicio</string>
+    <string name="sample_fab_mode_bidirectional">Ambas direcciones</string>
+    <string name="sample_fab_scroll_to_top_hint">Desplázate hacia abajo para mostrar el botón y presiónalo para regresar al inicio.</string>
+    <string name="sample_fab_bidirectional_hint">Utiliza el botón flotante para ir al inicio o al final. En posiciones intermedias, selecciona una dirección desde el menú.</string>
+
 </resources>

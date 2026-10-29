@@ -27,6 +27,9 @@ kotlin {
 }
 
 dependencies {
+    // Core
+    implementation(libs.androidx.core.ktx)
+
     // Compose
     implementation(platform(libs.androidx.compose.bom))
     api(libs.androidx.compose.ui)
